@@ -65,13 +65,23 @@
 
             <Button
                 android:id="@+id/username_sign_in_button"
-                style="?android:textAppearanceSmall"
+                style="@style/Widget.AppCompat.Button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:onClick="onLoginPressed"
                 android:text="@string/action_sign_in"
                 android:textStyle="bold" />
 
+            <Button
+                android:id="@+id/cancel_sign_in"
+                style="@style/Widget.AppCompat.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="onCancelPressed"
+                android:text="@string/action_cancel_sign_in" />
+
         </LinearLayout>
+
     </ScrollView>
 </LinearLayout>

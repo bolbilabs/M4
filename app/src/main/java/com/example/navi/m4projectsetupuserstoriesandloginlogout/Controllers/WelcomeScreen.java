@@ -41,7 +41,7 @@ public class WelcomeScreen extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                Intent registerIntent = new Intent(WelcomeScreen.this, com.example.navi.m4projectsetupuserstoriesandloginlogout.LoginActivity.class);
+                Intent registerIntent = new Intent(WelcomeScreen.this, com.example.navi.m4projectsetupuserstoriesandloginlogout.Controllers.LoginActivity.class);
                 startActivity(registerIntent);
             }
         });

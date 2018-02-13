@@ -10,10 +10,12 @@ import android.widget.Button;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public class WelcomeScreen extends AppCompatActivity {
 
     private Button loginButton;
+    private TextView registration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,12 +23,24 @@ public class WelcomeScreen extends AppCompatActivity {
         setContentView(R.layout.content_welcome_screen);
 
         loginButton = (Button) findViewById(R.id.loginButton);
+        registration = (TextView) findViewById(R.id.newUser);
+
         loginButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
             Intent loginIntent = new Intent(WelcomeScreen.this, com.example.navi.m4projectsetupuserstoriesandloginlogout.LoginActivity.class);
             startActivity(loginIntent);
+            }
+        });
+
+        // Change the LoginActivity.class to the registration.class when the latter is complete
+        registration.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                Intent registerIntent = new Intent(WelcomeScreen.this, com.example.navi.m4projectsetupuserstoriesandloginlogout.LoginActivity.class);
+                startActivity(registerIntent);
             }
         });
     }

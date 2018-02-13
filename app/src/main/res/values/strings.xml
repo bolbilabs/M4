@@ -18,4 +18,5 @@
         completions."
     </string>
     <string name="title_activity_dashboard">DashboardActivity</string>
+    <string name="title_activity_temp">TempActivity</string>
 </resources>

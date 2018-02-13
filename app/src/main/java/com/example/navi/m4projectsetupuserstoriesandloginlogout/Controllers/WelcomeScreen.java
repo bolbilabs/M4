@@ -1,4 +1,4 @@
-package com.example.navi.m4projectsetupuserstoriesandloginlogout;
+package com.example.navi.m4projectsetupuserstoriesandloginlogout.Controllers;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.example.navi.m4projectsetupuserstoriesandloginlogout.R;
 
 public class WelcomeScreen extends AppCompatActivity {
 
@@ -25,7 +27,7 @@ public class WelcomeScreen extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-            Intent loginIntent = new Intent(WelcomeScreen.this, com.example.navi.m4projectsetupuserstoriesandloginlogout.LoginActivity.class);
+            Intent loginIntent = new Intent(WelcomeScreen.this, com.example.navi.m4projectsetupuserstoriesandloginlogout.Controllers.LoginActivity.class);
             startActivity(loginIntent);
             }
         });

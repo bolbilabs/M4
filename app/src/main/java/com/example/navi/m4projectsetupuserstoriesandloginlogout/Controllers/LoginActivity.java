@@ -1,4 +1,4 @@
-package com.example.navi.m4projectsetupuserstoriesandloginlogout;
+package com.example.navi.m4projectsetupuserstoriesandloginlogout.Controllers;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -29,6 +29,8 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.example.navi.m4projectsetupuserstoriesandloginlogout.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -142,7 +144,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * @param view
      */
     public void onCancelPressed(View view) {
-        Intent cancelIntent = new Intent(LoginActivity.this, com.example.navi.m4projectsetupuserstoriesandloginlogout.WelcomeScreen.class);
+        Intent cancelIntent = new Intent(LoginActivity.this, com.example.navi.m4projectsetupuserstoriesandloginlogout.Controllers.WelcomeScreen.class);
         startActivity(cancelIntent);
     }
 

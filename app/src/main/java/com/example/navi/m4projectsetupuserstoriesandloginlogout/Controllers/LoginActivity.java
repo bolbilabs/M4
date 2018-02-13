@@ -3,6 +3,7 @@ package com.example.navi.m4projectsetupuserstoriesandloginlogout;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -136,7 +137,22 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         }
     }
+    /**
+     * when cancel is pressed, go back to welcome page
+     * @param view
+     */
+    public void onCancelPressed(View view) {
+        Intent cancelIntent = new Intent(LoginActivity.this, com.example.navi.m4projectsetupuserstoriesandloginlogout.WelcomeScreen.class);
+        startActivity(cancelIntent);
+    }
 
+    /**
+     * when log in is pressed, attempt to login
+     * @param view
+     */
+    public void onLoginPressed(View view) {
+        attemptLogin();
+    }
 
     /**
      * Attempts to sign in  the account specified by the login form.
@@ -144,9 +160,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * errors are presented and no actual login attempt is made.
      */
     private void attemptLogin() {
-        if (mAuthTask != null) {
+        /*if (mAuthTask != null) {
             return;
-        }
+        }*/
 
         // Reset errors.
         mUsernameView.setError(null);
@@ -185,8 +201,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            mAuthTask = new UserLoginTask(username, password);
-            mAuthTask.execute((Void) null);
+            //mAuthTask = new UserLoginTask(username, password);
+            //mAuthTask.execute((Void) null);
+            Intent loginIntent = new Intent(LoginActivity.this, com.example.navi.m4projectsetupuserstoriesandloginlogout.Controllers.DashboardActivity.class);
+            startActivity(loginIntent);
         }
     }
 

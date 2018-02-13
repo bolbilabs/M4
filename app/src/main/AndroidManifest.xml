@@ -28,6 +28,8 @@
             android:name=".LoginActivity"
             android:label="@string/title_activity_login" />
         <activity
+            android:name=".temp_login"/>
+        <activity
             android:name=".Controllers.DashboardActivity"
             android:label="@string/title_activity_dashboard"
             android:theme="@style/AppTheme.NoActionBar"></activity>

@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,6 +21,15 @@ import org.json.JSONObject;
 
 
 public class RegisterActivity extends AppCompatActivity {
+    boolean cancel = false;
+
+    private boolean isUsernameValid(String username) {
+        return username.length() > 0;
+    }
+
+    private boolean isPasswordValid(String password) {
+        return password.length() > 0;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,33 +51,84 @@ public class RegisterActivity extends AppCompatActivity {
                 final String password = etPassword.getText().toString();
                 final int admin = (etAdmin.isChecked()) ? 1 : 0;
 
-                Response.Listener<String> responseListener = new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonResponse = new JSONObject(response);
-                            boolean success = jsonResponse.getBoolean("success");
+                cancel = false;
+                View focusView = null;
 
-                            if (success) {
-                                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                                RegisterActivity.this.startActivity(intent);
-                            } else {
+                // Check for a valid username address.
+                if (TextUtils.isEmpty(username)) {
+                    etUsername.setError(getString(R.string.error_field_required));
+                    focusView = etUsername;
+                    cancel = true;
+                } else if (!isUsernameValid(username)) {
+                    etUsername.setError(getString(R.string.error_invalid_username));
+                    focusView = etUsername;
+                    cancel = true;
+                }
+
+                // Check for a valid password, if the user entered one.
+                if (TextUtils.isEmpty(password)) {
+                    etPassword.setError(getString(R.string.error_field_required));
+                    focusView = etPassword;
+                    cancel = true;
+                } else if (!isPasswordValid(password)) {
+                    etPassword.setError(getString(R.string.error_invalid_password));
+                    focusView = etPassword;
+                    cancel = true;
+                }
+
+                if (cancel) {
+                    focusView.requestFocus();
+                } else {
+
+                    Response.Listener<String> responseListener = new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            try {
+                                JSONObject jsonResponse = new JSONObject(response);
+                                boolean success = jsonResponse.getBoolean("success");
+
+                                if (success) {
+                                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                    RegisterActivity.this.startActivity(intent);
+
+                                } else {
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                                    builder.setMessage("Sorry, this username is already taken.")
+                                            .setNegativeButton("Retry", null)
+                                            .create()
+                                            .show();
+                                    cancel = true;
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+
+                            }
+                        }
+                    };
+
+
+                    RegisterRequest registerRequest = new RegisterRequest(username, password, admin, responseListener);
+                    RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
+                    queue.add(registerRequest);
+
+
+                    new CountDownTimer(30000, 1000) {
+
+                        public void onTick(long millisUntilFinished) {
+                        }
+
+                        public void onFinish() {
+                            if (!cancel) {
+                                cancel = true;
                                 AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
-                                builder.setMessage("Register Failed")
+                                builder.setMessage("A server error occurred. Please try again later.")
                                         .setNegativeButton("Retry", null)
                                         .create()
                                         .show();
                             }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
                         }
-                    }
-                };
-
-
-                RegisterRequest registerRequest = new RegisterRequest(username, password, admin, responseListener);
-                RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
-                queue.add(registerRequest);
+                    }.start();
+                }
             }
         });
 

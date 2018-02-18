@@ -6,6 +6,7 @@ import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -29,6 +30,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
@@ -71,6 +73,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+
+    boolean cancel = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -181,8 +186,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         String username = mUsernameView.getText().toString();
         String password = mPasswordView.getText().toString();
 
+        showProgress(true);
 
-        boolean cancel = false;
+
+
+        cancel = false;
         View focusView = null;
 
         // Check for a valid username address.
@@ -211,6 +219,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // There was an error; don't attempt login and focus the first
             // form field with an error.
             focusView.requestFocus();
+            showProgress(false);
+
         } else {
             Response.Listener<String> responseListener = new Response.Listener<String>() {
                 @Override
@@ -221,17 +231,28 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         if (success) {
                             // Show a progress spinner, and kick off a background task to
                             // perform the user login attempt.
-                            showProgress(true);
+                            showProgress(false);
                             //mAuthTask = new UserLoginTask(username, password);
                             //mAuthTask.execute((Void) null);
+                            String username = jsonResponse.getString("username");
+                            int admin = jsonResponse.getInt("admin");
+
                             Intent loginIntent = new Intent(LoginActivity.this, com.example.navi.m4projectsetupuserstoriesandloginlogout.Controllers.DashboardActivity.class);
+                            loginIntent.putExtra("username", username);
+                            loginIntent.putExtra("admin", admin);
                             startActivity(loginIntent);
                         } else {
+                            showProgress(false);
                             mPasswordView.setError(getString(R.string.error_login_cred_failed));
                             mPasswordView.requestFocus();
+                            cancel = true;
+
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
+                        showProgress(false);
+                        cancel = true;
+
                     }
 
                 }
@@ -241,6 +262,25 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             LoginRequest loginRequest = new LoginRequest(username, password, responseListener);
             RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
             queue.add(loginRequest);
+
+            new CountDownTimer(30000, 1000) {
+
+                public void onTick(long millisUntilFinished) {
+
+                }
+
+                public void onFinish() {
+                    if (!cancel) {
+                        cancel = true;
+                        showProgress(false);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                        builder.setMessage("Unable to communicate with the server. Please check your connection and try again later.")
+                                .setNegativeButton("Retry", null)
+                                .create()
+                                .show();
+                    }
+                }
+            }.start();
 
         }
 

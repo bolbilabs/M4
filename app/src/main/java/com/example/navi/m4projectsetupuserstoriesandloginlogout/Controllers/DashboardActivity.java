@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.navi.m4projectsetupuserstoriesandloginlogout.R;
 
@@ -21,6 +22,23 @@ public class DashboardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dashboard);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        final TextView dashboardWelcomeText = findViewById(R.id.DashboardWelcomeText);
+        final TextView dashboardAdminText = findViewById(R.id.DashboardAdminText);
+
+
+        Intent intent = getIntent();
+        String username = intent.getStringExtra("username");
+        int age = intent.getIntExtra("admin",0);
+
+        dashboardWelcomeText.setText("Welcome to the Dashboard, " + username + "!");
+
+        if (age == 1) {
+            dashboardAdminText.setText("You are currently an Admin!");
+        } else {
+            dashboardAdminText.setText("You are currently a User.");
+        }
+
 
 
         logoutButton = (Button) findViewById(R.id.logoutButton);

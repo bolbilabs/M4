@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Switch;
 
 import com.android.volley.RequestQueue;
@@ -42,6 +43,10 @@ public class RegisterActivity extends AppCompatActivity {
 
         final Button bRegister = (Button) findViewById(R.id.bRegister);
         final Button bCancel = (Button) findViewById(R.id.bCancel);
+
+        final ProgressBar pbLoading = (ProgressBar) findViewById(R.id.pbLoading);
+        pbLoading.setVisibility(View.INVISIBLE);
+
 
 
         bRegister.setOnClickListener(new View.OnClickListener() {
@@ -86,6 +91,7 @@ public class RegisterActivity extends AppCompatActivity {
                             try {
                                 JSONObject jsonResponse = new JSONObject(response);
                                 boolean success = jsonResponse.getBoolean("success");
+                                pbLoading.setVisibility(View.INVISIBLE);
 
                                 if (success) {
                                     Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
@@ -111,17 +117,21 @@ public class RegisterActivity extends AppCompatActivity {
                     RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
                     queue.add(registerRequest);
 
+                    pbLoading.setVisibility(View.VISIBLE);
+
 
                     new CountDownTimer(30000, 1000) {
 
                         public void onTick(long millisUntilFinished) {
+
                         }
 
                         public void onFinish() {
                             if (!cancel) {
                                 cancel = true;
+                                pbLoading.setVisibility(View.INVISIBLE);
                                 AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
-                                builder.setMessage("A server error occurred. Please try again later.")
+                                builder.setMessage("Unable to communicate with the server. Please check your connection and try again later.")
                                         .setNegativeButton("Retry", null)
                                         .create()
                                         .show();

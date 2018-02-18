@@ -3,6 +3,7 @@ package com.example.navi.m4projectsetupuserstoriesandloginlogout.Controllers;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
@@ -30,7 +31,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
 import com.example.navi.m4projectsetupuserstoriesandloginlogout.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -174,6 +181,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         String username = mUsernameView.getText().toString();
         String password = mPasswordView.getText().toString();
 
+
         boolean cancel = false;
         View focusView = null;
 
@@ -203,18 +211,39 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // There was an error; don't attempt login and focus the first
             // form field with an error.
             focusView.requestFocus();
-        } else if (username.equals("user") && password.equals("pass")){
-            // Show a progress spinner, and kick off a background task to
-            // perform the user login attempt.
-            showProgress(true);
-            //mAuthTask = new UserLoginTask(username, password);
-            //mAuthTask.execute((Void) null);
-            Intent loginIntent = new Intent(LoginActivity.this, com.example.navi.m4projectsetupuserstoriesandloginlogout.Controllers.DashboardActivity.class);
-            startActivity(loginIntent);
         } else {
-            mPasswordView.setError(getString(R.string.error_login_cred_failed));
-            mPasswordView.requestFocus();
+            Response.Listener<String> responseListener = new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    try {
+                        JSONObject jsonResponse = new JSONObject(response);
+                        boolean success = jsonResponse.getBoolean("success");
+                        if (success) {
+                            // Show a progress spinner, and kick off a background task to
+                            // perform the user login attempt.
+                            showProgress(true);
+                            //mAuthTask = new UserLoginTask(username, password);
+                            //mAuthTask.execute((Void) null);
+                            Intent loginIntent = new Intent(LoginActivity.this, com.example.navi.m4projectsetupuserstoriesandloginlogout.Controllers.DashboardActivity.class);
+                            startActivity(loginIntent);
+                        } else {
+                            mPasswordView.setError(getString(R.string.error_login_cred_failed));
+                            mPasswordView.requestFocus();
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            };
+
+
+            LoginRequest loginRequest = new LoginRequest(username, password, responseListener);
+            RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
+            queue.add(loginRequest);
+
         }
+
     }
 
     private boolean isUsernameValid(String username) {

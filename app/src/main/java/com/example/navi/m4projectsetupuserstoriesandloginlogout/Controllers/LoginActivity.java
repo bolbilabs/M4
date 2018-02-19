@@ -76,6 +76,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     boolean cancel = false;
 
+    @Override
+    public void onBackPressed() {
+        cancel = true;
+        super.onBackPressed();
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -213,6 +219,20 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mPasswordView.setError(getString(R.string.error_invalid_password));
             focusView = mPasswordView;
             cancel = true;
+        }
+
+        // Hard coded user/admin and pass just in case the database is down
+        if (username.equals("user") && password.equals("pass")) {
+            Intent loginIntent = new Intent(LoginActivity.this, com.example.navi.m4projectsetupuserstoriesandloginlogout.Controllers.DashboardActivity.class);
+            loginIntent.putExtra("username", username);
+            loginIntent.putExtra("admin", 0);
+            startActivity(loginIntent);
+        }
+        if (username.equals("admin") && password.equals("pass")) {
+            Intent loginIntent = new Intent(LoginActivity.this, com.example.navi.m4projectsetupuserstoriesandloginlogout.Controllers.DashboardActivity.class);
+            loginIntent.putExtra("username", username);
+            loginIntent.putExtra("admin", 1);
+            startActivity(loginIntent);
         }
 
         if (cancel) {

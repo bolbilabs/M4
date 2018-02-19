@@ -33,6 +33,12 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        cancel = true;
+        super.onBackPressed();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);

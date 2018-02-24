@@ -8,12 +8,12 @@ import java.util.Scanner;
 /**
  * created by Thomas Brownlow on 2/24/18
  */
-public class preRegisteredShelters {
+public class PreRegisteredShelters {
 
-    private List<Shelter> shelters;
+    private ArrayList<Shelter> shelters;
     private static final int SIZE = 13;
 
-    public preRegisteredShelters() {
+    public PreRegisteredShelters() {
         shelters = new ArrayList<Shelter>();
         readFile();
     }
@@ -35,7 +35,7 @@ public class preRegisteredShelters {
 
         }
     }
-    public List<Shelter> getShelters() {
+    public ArrayList<Shelter> getShelters() {
         return shelters;
     }
 }

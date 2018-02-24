@@ -27,9 +27,8 @@ public class PreRegisteredShelters {
             while (scan.hasNext()) {
                 line = scan.nextLine();
                 String[] tokens = line.split(",");
-                String[] tokens2 = line.split("\"");
                 temp = new Shelter(tokens[0], tokens[1], tokens[2], tokens[3], tokens[4],
-                                    tokens[5], tokens[6], tokens2[3], tokens2[4]);
+                                    tokens[5], tokens[6], tokens[7], tokens[8]);
                 shelters.add(temp);
             }
         } catch (IOException e) {

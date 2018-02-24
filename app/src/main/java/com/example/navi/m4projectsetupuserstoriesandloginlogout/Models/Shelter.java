@@ -1,4 +1,5 @@
 package com.example.navi.m4projectsetupuserstoriesandloginlogout.Models;
+
 /**
  * created by Thomas Brownlow on 2/24/18
  */

@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -33,8 +33,27 @@
             android:name=".Controllers.DashboardActivity"
             android:label="@string/title_activity_dashboard"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Controllers.RegisterActivity"
-                  android:label="Register"></activity>
+        <activity
+            android:name=".Controllers.RegisterActivity"
+            android:label="Register" />
+        <activity
+            android:name=".Controllers.ShelterListActivity"
+            android:label="@string/title_shelter_list"
+            android:parentActivityName=".Controllers.DashboardActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.navi.m4projectsetupuserstoriesandloginlogout.Controllers.DashboardActivity" />
+        </activity>
+        <activity
+            android:name=".Controllers.ShelterDetailActivity"
+            android:label="@string/title_shelter_detail"
+            android:parentActivityName=".Controllers.ShelterListActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.navi.m4projectsetupuserstoriesandloginlogout.Controllers.ShelterListActivity" />
+        </activity>
     </application>
 
 </manifest>

@@ -59,7 +59,7 @@ public class ShelterListActivity extends AppCompatActivity {
 
         if (!loaded) {
 
-            InputStream inputStream = getResources().openRawResource(R.raw.homeless_shelter_database);
+            InputStream inputStream = getResources().openRawResource(+ R.raw.homeless_shelter_database);
             try {
                 Scanner scan = new Scanner(inputStream, StandardCharsets.UTF_8.toString());
                 String line;

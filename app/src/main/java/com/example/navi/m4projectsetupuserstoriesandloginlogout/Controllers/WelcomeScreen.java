@@ -16,6 +16,7 @@ import com.example.navi.m4projectsetupuserstoriesandloginlogout.R;
 
 public class WelcomeScreen extends AppCompatActivity {
 
+
     private Button loginButton;
     private TextView registration;
 

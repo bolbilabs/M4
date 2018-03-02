@@ -278,7 +278,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 }
             };
 
-
             LoginRequest loginRequest = new LoginRequest(username, password, responseListener);
             RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
             queue.add(loginRequest);

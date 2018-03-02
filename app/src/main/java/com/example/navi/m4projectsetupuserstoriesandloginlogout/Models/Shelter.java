@@ -5,6 +5,7 @@ package com.example.navi.m4projectsetupuserstoriesandloginlogout.Models;
  */
 public class Shelter {
 
+
     private String key;
     private String name;
     private String capacity;

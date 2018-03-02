@@ -20,6 +20,7 @@ import com.example.navi.m4projectsetupuserstoriesandloginlogout.R;
  */
 public class ShelterDetailActivity extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

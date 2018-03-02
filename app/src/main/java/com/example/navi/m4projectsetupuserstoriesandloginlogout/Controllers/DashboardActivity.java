@@ -29,8 +29,7 @@ public class DashboardActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         final TextView dashboardWelcomeText = findViewById(R.id.DashboardWelcomeText);
         final TextView dashboardAdminText = findViewById(R.id.DashboardAdminText);
-
-
+        
 
         Intent intent = getIntent();
 

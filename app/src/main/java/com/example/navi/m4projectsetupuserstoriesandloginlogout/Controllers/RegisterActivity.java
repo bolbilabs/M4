@@ -38,6 +38,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

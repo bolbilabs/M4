@@ -173,7 +173,10 @@ public class ShelterListActivity extends AppCompatActivity {
                         List<Shelter> filteredList = new ArrayList<>();
                         for (Shelter row : preRegisteredShelters.getShelters()) {
                             //filter by key for testing
-                            if (Integer.parseInt(row.getKey()) > Integer.parseInt(charString)) {
+                            /*if (Integer.parseInt(row.getKey()) > Integer.parseInt(charString)) {
+                                filteredList.add(row);
+                            }*/
+                            if (ShelterSearch.filterShelter(charString, row)) {
                                 filteredList.add(row);
                             }
                         }

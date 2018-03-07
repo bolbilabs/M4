@@ -2,89 +2,51 @@ package com.example.navi.m4projectsetupuserstoriesandloginlogout.Controllers;
 
 import com.example.navi.m4projectsetupuserstoriesandloginlogout.Models.Shelter;
 
-import java.util.List;
 
 /**
  * Created by dodo on 3/5/18.
  */
 
-public class ShelterSearch {
+public final class ShelterSearch {
 
-    // Filter Class
-    public void filter(String charText, List<Shelter> mValues) {
+    private ShelterSearch() {
+        //do not use
+    }
+
+    // see if shelter should be included in filtered list or
+    public static boolean filterShelter(String charText, Shelter s) {
         charText = charText.toLowerCase();
-        if (charText.length() != 0) {
-            mValues.clear();
-            switch (charText) {
-                case "male":
-                    for (Shelter s : mValues) {
-                        String res = s.getRestrictions();
+        String res = s.getRestrictions();
 
-                        String[] tokens = res.split("/");
-                        String first = tokens[0].toLowerCase();
+        //modify charText
+        if (charText.equals("men"))
+            charText = "male";
+        if (charText.equals("women"))
+            charText = "female";
+        if (charText.equals("families with newborns") || charText.equals("families w/ children under 5"))
+            charText = "families w/ newborns";
+        if (charText.equals("child"))
+            charText = "children";
+        if (charText.equals("young adult"))
+            charText = "young adults";
 
-                        if (!(first.contains("women") || first.contains("female"))) {
-                            mValues.add(s);
-                        }
-                    }
-                case "men":
-                    for (Shelter s : mValues) {
-                        String res = s.getRestrictions();
-
-                        String[] tokens = res.split("/");
-                        String first = tokens[0].toLowerCase();
-
-                        if (!(first.contains("women") || first.contains("female"))) {
-                            mValues.add(s);
-                        }
-                    }
-                case "female":
-                    for (Shelter s : mValues) {
-                        String res = s.getRestrictions();
-
-                        String[] tokens = res.split("/");
-                        String first = tokens[0].toLowerCase();
-
-                        if (!(first.contains("men") || first.contains("male"))) {
-                            mValues.add(s);
-                        }
-                    }
-                case "women":
-                    for (Shelter s : mValues) {
-                        String res = s.getRestrictions();
-
-                        String[] tokens = res.split("/");
-                        String first = tokens[0].toLowerCase();
-
-                        if (!(first.contains("men") || first.contains("male"))) {
-                            mValues.add(s);
-                        }
-                    }
-                case "families w/ newborns":
-                    for (Shelter s : mValues) {
-                        String res = s.getRestrictions().toLowerCase();
-
-                        if (res.contains("families w/ newborns") || res.contains("families w/ children under 5")) {
-                            mValues.add(s);
-                        }
-                    }
-                case "families with newborns":
-                    for (Shelter s : mValues) {
-                        String res = s.getRestrictions().toLowerCase();
-
-                        if (res.contains("families w/ newborns") || res.contains("families w/ children under 5")) {
-                            mValues.add(s);
-                        }
-                    }
-                case "families w/ children under 5":
-                    for (Shelter s : mValues) {
-                        String res = s.getRestrictions().toLowerCase();
-
-                        if (res.contains("families w/ newborns") || res.contains("families w/ children under 5")) {
-                            mValues.add(s);
-                        }
-                    }
-            }
+        switch (charText) {
+            case "male":
+                return res.contains("men") || res.contains("male") || res.contains("anyone");
+            case "female":
+                return res.contains("women") || res.contains("female") || res.contains("anyone");
+            case "families w/ newborns":
+                return res.contains("families w/ newborns") || res.contains("families w/ children under 5")
+                        || res.contains("families") || res.contains("anyone");
+            case "children":
+                return ((res.contains("children") || res.contains("families")) && !(res.contains("families w/ newborns")
+                        || res.contains("families w/ children under 5"))) || res.contains("anyone");
+            case "young adults":
+                return res.contains("anyone") || res.contains("young adults");
+            case "anyone":
+                return true;
+            default:
+                return s.getName().equals(charText);
         }
     }
     

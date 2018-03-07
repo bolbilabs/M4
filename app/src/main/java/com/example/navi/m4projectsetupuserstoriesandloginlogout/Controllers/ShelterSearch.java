@@ -2,21 +2,16 @@ package com.example.navi.m4projectsetupuserstoriesandloginlogout.Controllers;
 
 import com.example.navi.m4projectsetupuserstoriesandloginlogout.Models.Shelter;
 
-
-/**
- * Created by dodo on 3/5/18.
- */
-
-public final class ShelterSearch {
+final class ShelterSearch {
 
     private ShelterSearch() {
         //do not use
     }
 
     // see if shelter should be included in filtered list or
-    public static boolean filterShelter(String charText, Shelter s) {
+    static boolean filterShelter(String charText, Shelter s) {
         charText = charText.toLowerCase();
-        String res = s.getRestrictions();
+        String res = s.getRestrictions().toLowerCase();
 
         //modify charText
         if (charText.equals("men"))
@@ -32,7 +27,8 @@ public final class ShelterSearch {
 
         switch (charText) {
             case "male":
-                return res.contains("men") || res.contains("male") || res.contains("anyone");
+                return ((res.contains("men") && !res.contains("women"))
+                        || (res.contains("male") && !res.contains("female"))|| res.contains("anyone"));
             case "female":
                 return res.contains("women") || res.contains("female") || res.contains("anyone");
             case "families w/ newborns":
@@ -46,7 +42,7 @@ public final class ShelterSearch {
             case "anyone":
                 return true;
             default:
-                return s.getName().equals(charText);
+                return s.getName().toLowerCase().contains(charText);
         }
     }
     

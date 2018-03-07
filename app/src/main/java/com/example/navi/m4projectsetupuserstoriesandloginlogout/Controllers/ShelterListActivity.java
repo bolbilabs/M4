@@ -12,7 +12,11 @@ import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 import android.widget.TextView;
+import android.view.MenuItem;
+import android.support.v4.view.MenuItemCompat;
+import android.app.SearchManager;
 
 import android.support.v7.app.ActionBar;
 
@@ -102,6 +106,7 @@ public class ShelterListActivity extends AppCompatActivity {
         View recyclerView = findViewById(R.id.shelter_list);
         assert recyclerView != null;
         setupRecyclerView((RecyclerView) recyclerView);
+
     }
 
 
@@ -110,6 +115,30 @@ public class ShelterListActivity extends AppCompatActivity {
 //        PreRegisteredShelters preRegisteredShelters = new PreRegisteredShelters();
         recyclerView.setAdapter(new SimpleShelterRecyclerViewAdapter(this, preRegisteredShelters.getShelters(), mTwoPane));
     }
+
+    // Associate searchable configuration with the SearchView
+    SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+    SearchView searchView = (SearchView) findViewById(R.id.search_bar).getActionView();
+        searchView.setSearchableInfo(searchManager
+                .getSearchableInfo(getComponentName()));
+        searchView.setMaxWidth(Integer.MAX_VALUE);
+
+    // listening to search query text change
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        @Override
+        public boolean onQueryTextSubmit(String query) {
+            // filter recycler view when query submitted
+            mAdapter.getFilter().filter(query);
+            return false;
+        }
+
+        @Override
+        public boolean onQueryTextChange(String query) {
+            // filter recycler view when text is changed
+            mAdapter.getFilter().filter(query);
+            return false;
+        }
+    });
 
     public static class SimpleShelterRecyclerViewAdapter
             extends RecyclerView.Adapter<SimpleShelterRecyclerViewAdapter.ViewHolder> {

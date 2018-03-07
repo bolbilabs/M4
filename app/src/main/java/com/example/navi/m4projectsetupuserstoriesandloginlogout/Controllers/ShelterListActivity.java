@@ -12,6 +12,8 @@ import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filterable;
+import android.widget.Filter;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.view.MenuItem;
@@ -26,6 +28,7 @@ import com.example.navi.m4projectsetupuserstoriesandloginlogout.R;
 
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -46,6 +49,9 @@ public class ShelterListActivity extends AppCompatActivity {
     private boolean mTwoPane;
 
     private boolean loaded = false;
+
+    private SimpleShelterRecyclerViewAdapter mAdaptor
+            = new SimpleShelterRecyclerViewAdapter(this, PreRegisteredShelters.getInstance().getShelters(), mTwoPane);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,44 +113,41 @@ public class ShelterListActivity extends AppCompatActivity {
         assert recyclerView != null;
         setupRecyclerView((RecyclerView) recyclerView);
 
+        // Associate searchable configuration with the SearchView
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) findViewById(R.id.search_bar);
+
+        // listening to search query text change
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                // filter recycler view when query submitted
+                mAdaptor.getFilter().filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String query) {
+                // filter recycler view when text is changed
+                mAdaptor.getFilter().filter(query);
+                return false;
+            }
+        });
+
     }
 
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
         final PreRegisteredShelters preRegisteredShelters = PreRegisteredShelters.getInstance();
 //        PreRegisteredShelters preRegisteredShelters = new PreRegisteredShelters();
-        recyclerView.setAdapter(new SimpleShelterRecyclerViewAdapter(this, preRegisteredShelters.getShelters(), mTwoPane));
+        recyclerView.setAdapter(mAdaptor);
     }
 
-    // Associate searchable configuration with the SearchView
-    SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-    SearchView searchView = (SearchView) findViewById(R.id.search_bar).getActionView();
-        searchView.setSearchableInfo(searchManager
-                .getSearchableInfo(getComponentName()));
-        searchView.setMaxWidth(Integer.MAX_VALUE);
-
-    // listening to search query text change
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-        @Override
-        public boolean onQueryTextSubmit(String query) {
-            // filter recycler view when query submitted
-            mAdapter.getFilter().filter(query);
-            return false;
-        }
-
-        @Override
-        public boolean onQueryTextChange(String query) {
-            // filter recycler view when text is changed
-            mAdapter.getFilter().filter(query);
-            return false;
-        }
-    });
-
     public static class SimpleShelterRecyclerViewAdapter
-            extends RecyclerView.Adapter<SimpleShelterRecyclerViewAdapter.ViewHolder> {
+            extends RecyclerView.Adapter<SimpleShelterRecyclerViewAdapter.ViewHolder> implements Filterable {
 
         private final ShelterListActivity mParentActivity;
-        private final List<Shelter> mValues;
+        private List<Shelter> mValues;
         private final boolean mTwoPane;
 
 
@@ -154,6 +157,41 @@ public class ShelterListActivity extends AppCompatActivity {
             mValues = items;
             mParentActivity = parent;
             mTwoPane = twoPane;
+        }
+
+        @Override
+        public Filter getFilter() {
+            return new Filter() {
+                @Override
+                protected FilterResults performFiltering(CharSequence charSequence) {
+                    String charString = charSequence.toString();
+                    PreRegisteredShelters preRegisteredShelters = PreRegisteredShelters.getInstance();
+                    List<Shelter> shelter_list;
+                    if (charString.isEmpty()) {
+                        shelter_list = preRegisteredShelters.getShelters();
+                    } else {
+                        List<Shelter> filteredList = new ArrayList<>();
+                        for (Shelter row : preRegisteredShelters.getShelters()) {
+                            //filter by key for testing
+                            if (Integer.parseInt(row.getKey()) > Integer.parseInt(charString)) {
+                                filteredList.add(row);
+                            }
+                        }
+
+                        shelter_list = filteredList;
+                    }
+
+                    FilterResults filterResults = new FilterResults();
+                    filterResults.values = shelter_list;
+                    return filterResults;
+                }
+
+                @Override
+                protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                    mValues = (ArrayList<Shelter>) filterResults.values;
+                    notifyDataSetChanged();
+                }
+            };
         }
 
         @Override

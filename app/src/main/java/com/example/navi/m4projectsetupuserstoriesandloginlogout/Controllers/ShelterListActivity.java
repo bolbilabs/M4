@@ -54,9 +54,6 @@ public class ShelterListActivity extends AppCompatActivity {
      */
     private boolean mTwoPane;
 
-    private boolean loaded = false;
-
-    boolean cancel = false;
 
 
     private SimpleShelterRecyclerViewAdapter mAdaptor
@@ -72,82 +69,7 @@ public class ShelterListActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         toolbar.setTitle(getTitle());
 
-        final PreRegisteredShelters preRegisteredShelters = PreRegisteredShelters.getInstance();
 
-        preRegisteredShelters.clearAllShelters();
-
-        if (!loaded) {
-                /*
-                    CSV Reader: Uncomment if server is down.
-                */
-//            InputStream inputStream = getResources().openRawResource(+ R.raw.homeless_shelter_database);
-//            try {
-//                Scanner scan = new Scanner(inputStream, StandardCharsets.UTF_8.toString());
-//                String line;
-//                Shelter temp;
-//                scan.nextLine(); //throw out first line
-//                while (scan.hasNext()) {
-//                    line = scan.nextLine();
-//                    String[] tokens = line.split(",");
-//                    temp = new Shelter(tokens[0], tokens[1], tokens[2], tokens[3], tokens[4],
-//                            tokens[5], tokens[6], tokens[7], tokens[8]);
-//                    preRegisteredShelters.addShelter(temp);
-//                }
-//            } catch (Exception e) {
-//
-//            }
-//            loaded = true;
-
-
-            Response.Listener<String> responseListener = new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    try {
-                        JSONObject jsonInitResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
-                        boolean success = jsonInitResponse.getBoolean("success");
-                        int shelterCount = jsonInitResponse.getInt("shelterCount");
-                        if (success) {
-                            // Show a progress spinner, and kick off a background task to
-                            // perform the user login attempt.
-                            //showProgress(false);
-                            //mAuthTask = new UserLoginTask(username, password);
-                            //mAuthTask.execute((Void) null);
-
-                            Shelter temp;
-
-                            for (int i = 0; i < shelterCount; i++) {
-
-                                JSONObject jsonResponse = jsonInitResponse.getJSONObject(String.valueOf(i));
-
-                                temp = new Shelter(String.valueOf(jsonResponse.getInt("shelter_id")), jsonResponse.getString("name"),
-                                        String.valueOf(jsonResponse.getInt("capacity")), jsonResponse.getString("restrictions"),
-                                        jsonResponse.getString("longitude"), jsonResponse.getString("latitude"),
-                                        jsonResponse.getString("address"), jsonResponse.getString("notes"),
-                                        jsonResponse.getString("phoneNumber"));
-                                 preRegisteredShelters.addShelter(temp);
-
-
-                            }
-                            loaded = true;
-
-
-                        } else {
-                            cancel = true;
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                       // showProgress(false);
-                        cancel = true;
-
-                    }
-
-                }
-            };
-
-            ShelterDataRequest shelterDataRequest = new ShelterDataRequest(responseListener);
-            RequestQueue queue = Volley.newRequestQueue(ShelterListActivity.this);
-            queue.add(shelterDataRequest);
-        }
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -200,7 +122,7 @@ public class ShelterListActivity extends AppCompatActivity {
 
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        final PreRegisteredShelters preRegisteredShelters = PreRegisteredShelters.getInstance();
+       // final PreRegisteredShelters preRegisteredShelters = PreRegisteredShelters.getInstance();
 //        PreRegisteredShelters preRegisteredShelters = new PreRegisteredShelters();
         recyclerView.setAdapter(mAdaptor);
     }

@@ -23,4 +23,5 @@
     <string name="title_shelter_list">Shelters</string>
     <string name="title_shelter_detail">Shelter Detail</string>
     <string name="title_activity_shelter_data_request">ShelterDataRequest</string>
+    <string name="title_activity_map">Map</string>
 </resources>

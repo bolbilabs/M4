@@ -13,7 +13,10 @@ import java.util.Map;
 
 public class LoginRequest extends StringRequest {
 //    private static final String LOGIN_REQUEST_URL = "http://136.59.225.27/Login.php";
-    private static final String LOGIN_REQUEST_URL = "http://192.168.1.19/Login.php";
+    //private static final String LOGIN_REQUEST_URL = "http://192.168.1.19/Login.php";
+    private static final String LOGIN_REQUEST_URL = "http://98.252.206.56/Login.php";
+
+
     private Map<String, String> params;
 
     public LoginRequest(String username, String password, Response.Listener<String> listener) {

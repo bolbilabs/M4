@@ -1,5 +1,6 @@
 package com.example.navi.m4projectsetupuserstoriesandloginlogout.Controllers;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -212,11 +213,36 @@ public class DashboardActivity extends AppCompatActivity {
         releaseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                User.setReservedShelterID(0);
-                User.setReservedBeds(0);
-                // Set User Values to Zero and Add Back to Shelter using PHP
-                finish();
-                startActivity(getIntent());
+
+                Response.Listener<String> responseListener = new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonResponse = new JSONObject(response);
+                            boolean success = jsonResponse.getBoolean("success");
+                            if (success) {
+                                User.setReservedShelterID(0);
+                                User.setReservedBeds(0);
+                                // Set User Values to Zero and Add Back to Shelter using PHP
+                                finish();
+                                startActivity(getIntent());
+                            } else {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(DashboardActivity.this);
+                                builder.setMessage("An unknown error occurred.")
+                                        .setNegativeButton("Retry", null)
+                                        .create()
+                                        .show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                };
+
+                ReleaseRequest releaseRequest = new ReleaseRequest(reservedBeds, reservedShelterID, username, responseListener);
+                RequestQueue queue = Volley.newRequestQueue(DashboardActivity.this);
+                queue.add(releaseRequest);
             }
         });
 

@@ -24,4 +24,6 @@
     <string name="title_shelter_detail">Shelter Detail</string>
     <string name="title_activity_shelter_data_request">ShelterDataRequest</string>
     <string name="title_activity_map">Map</string>
+    <string name="title_activity_reserve_request">ReserveRequest</string>
+    <string name="title_activity_release_request">ReleaseRequest</string>
 </resources>

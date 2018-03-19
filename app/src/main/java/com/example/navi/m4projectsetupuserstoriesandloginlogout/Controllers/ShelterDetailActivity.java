@@ -15,9 +15,15 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
 import com.example.navi.m4projectsetupuserstoriesandloginlogout.Models.PreRegisteredShelters;
 import com.example.navi.m4projectsetupuserstoriesandloginlogout.Models.User;
 import com.example.navi.m4projectsetupuserstoriesandloginlogout.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * An activity representing a single Shelter detail screen. This
@@ -85,13 +91,44 @@ public class ShelterDetailActivity extends AppCompatActivity {
                         @Override
                         public void onClick(View view) {
                             if (!(input.getText().toString().equals("")) && isReserveValid(Integer.parseInt(input.getText().toString()))) {
-                                String text = input.getText().toString();
-                                User.setReservedBeds(Integer.parseInt(text));
-                                finish();
-                                User.setReservedShelterID(Integer.parseInt(preRegisteredShelters.getCurrentShelter().getKey()));
-                                Intent dashboardScreenIntent = new Intent(ShelterDetailActivity.this, com.example.navi.m4projectsetupuserstoriesandloginlogout.Controllers.DashboardActivity.class);
-                                startActivity(dashboardScreenIntent);
-                                ad.dismiss();
+                                int reservedBeds = Integer.parseInt(input.getText().toString());
+                                int reservedShelter_id = Integer.parseInt(preRegisteredShelters.getCurrentShelter().getKey());
+                                String username = User.getUsername();
+
+
+
+                                Response.Listener<String> responseListener = new Response.Listener<String>() {
+                                    @Override
+                                    public void onResponse(String response) {
+                                        try {
+                                            JSONObject jsonResponse = new JSONObject(response);
+                                            boolean success = jsonResponse.getBoolean("success");
+                                            if (success) {
+                                                String text = input.getText().toString();
+                                                User.setReservedBeds(Integer.parseInt(text));
+                                                finish();
+                                                User.setReservedShelterID(Integer.parseInt(preRegisteredShelters.getCurrentShelter().getKey()));
+                                                Intent dashboardScreenIntent = new Intent(ShelterDetailActivity.this, com.example.navi.m4projectsetupuserstoriesandloginlogout.Controllers.DashboardActivity.class);
+                                                startActivity(dashboardScreenIntent);
+                                                ad.dismiss();
+                                            } else {
+                                                input.setError("We're sorry, but your reservation exceeds maximum occupancy.");
+
+                                            }
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+
+                                    }
+                                };
+
+                                ReserveRequest reserveRequest = new ReserveRequest(reservedBeds, reservedShelter_id, username, responseListener);
+                                RequestQueue queue = Volley.newRequestQueue(ShelterDetailActivity.this);
+                                queue.add(reserveRequest);
+
+
+
+
                             } else {
                                 input.setError("Please enter a valid Bed count (1-6).");
 

@@ -1,15 +1,22 @@
 package com.example.navi.m4projectsetupuserstoriesandloginlogout.Controllers;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
 import android.view.View;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.EditText;
 
+import com.example.navi.m4projectsetupuserstoriesandloginlogout.Models.PreRegisteredShelters;
+import com.example.navi.m4projectsetupuserstoriesandloginlogout.Models.User;
 import com.example.navi.m4projectsetupuserstoriesandloginlogout.R;
 
 /**
@@ -19,6 +26,8 @@ import com.example.navi.m4projectsetupuserstoriesandloginlogout.R;
  * in a {@link ShelterListActivity}.
  */
 public class ShelterDetailActivity extends AppCompatActivity {
+    EditText input;
+
 
 
     @Override
@@ -28,42 +37,106 @@ public class ShelterDetailActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        final PreRegisteredShelters preRegisteredShelters = PreRegisteredShelters.getInstance();
+
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Reserve Beds");
+        builder.setIcon(R.drawable.ic_launcher_foreground);
+        builder.setMessage("Number of Beds to Reserve:");
+        input = new EditText(this);
+        input.setInputType(InputType.TYPE_CLASS_NUMBER);
+        builder.setView(input);
+
+
+        builder.setPositiveButton("Reserve", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own detail action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public void onClick(DialogInterface dialogInterface, int i) {
+
             }
         });
 
-        // Show the Up button in the action bar.
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+
+        final AlertDialog ad = builder.create();
+
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+
+        if (User.getReservedBeds() > 0) {
+            fab.setVisibility(View.INVISIBLE);
         }
 
-        // savedInstanceState is non-null when there is fragment state
-        // saved from previous configurations of this activity
-        // (e.g. when rotating the screen from portrait to landscape).
-        // In this case, the fragment will automatically be re-added
-        // to its container so we don't need to manually add it.
-        // For more information, see the Fragments API guide at:
-        //
-        // http://developer.android.com/guide/components/fragments.html
-        //
-        if (savedInstanceState == null) {
-            // Create the detail fragment and add it to the activity
-            // using a fragment transaction.
-            Bundle arguments = new Bundle();
-            arguments.putString(ShelterDetailFragment.ARG_ITEM_ID,
-                    getIntent().getStringExtra(ShelterDetailFragment.ARG_ITEM_ID));
-            ShelterDetailFragment fragment = new ShelterDetailFragment();
-            fragment.setArguments(arguments);
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.shelter_detail_container, fragment)
-                    .commit();
-        }
+
+        fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+//                Snackbar.make(view, "Replace with your own detail action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+
+                    ad.show();
+
+                    ad.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            if (!(input.getText().toString().equals("")) && isReserveValid(Integer.parseInt(input.getText().toString()))) {
+                                String text = input.getText().toString();
+                                User.setReservedBeds(Integer.parseInt(text));
+                                finish();
+                                User.setReservedShelterID(Integer.parseInt(preRegisteredShelters.getCurrentShelter().getKey()));
+                                Intent dashboardScreenIntent = new Intent(ShelterDetailActivity.this, com.example.navi.m4projectsetupuserstoriesandloginlogout.Controllers.DashboardActivity.class);
+                                startActivity(dashboardScreenIntent);
+                                ad.dismiss();
+                            } else {
+                                input.setError("Please enter a valid Bed count (1-6).");
+
+                            }
+                        }
+                    });
+
+
+                }
+            });
+
+            // Show the Up button in the action bar.
+            ActionBar actionBar = getSupportActionBar();
+            if (actionBar != null) {
+                actionBar.setDisplayHomeAsUpEnabled(true);
+            }
+
+
+
+            // savedInstanceState is non-null when there is fragment state
+            // saved from previous configurations of this activity
+            // (e.g. when rotating the screen from portrait to landscape).
+            // In this case, the fragment will automatically be re-added
+            // to its container so we don't need to manually add it.
+            // For more information, see the Fragments API guide at:
+            //
+            // http://developer.android.com/guide/components/fragments.html
+            //
+            if (savedInstanceState == null) {
+                // Create the detail fragment and add it to the activity
+                // using a fragment transaction.
+                Bundle arguments = new Bundle();
+                arguments.putString(ShelterDetailFragment.ARG_ITEM_ID,
+                        getIntent().getStringExtra(ShelterDetailFragment.ARG_ITEM_ID));
+                ShelterDetailFragment fragment = new ShelterDetailFragment();
+                fragment.setArguments(arguments);
+                getSupportFragmentManager().beginTransaction()
+                        .add(R.id.shelter_detail_container, fragment)
+                        .commit();
+            }
+    }
+
+
+    private boolean isReserveValid(int reserveCount) {
+        return (reserveCount > 0) && (reserveCount < 7);
     }
 
     @Override

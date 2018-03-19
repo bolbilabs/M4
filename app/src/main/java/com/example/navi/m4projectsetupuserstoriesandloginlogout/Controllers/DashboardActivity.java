@@ -15,6 +15,7 @@ import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
 import com.example.navi.m4projectsetupuserstoriesandloginlogout.Models.PreRegisteredShelters;
 import com.example.navi.m4projectsetupuserstoriesandloginlogout.Models.Shelter;
+import com.example.navi.m4projectsetupuserstoriesandloginlogout.Models.User;
 import com.example.navi.m4projectsetupuserstoriesandloginlogout.R;
 
 import org.json.JSONException;
@@ -25,9 +26,13 @@ public class DashboardActivity extends AppCompatActivity {
     private Button logoutButton;
     private Button shelterButton;
     private Button mapButton;
+    private Button releaseButton;
 
     private String username;
     private int admin;
+    private int reservedBeds;
+    private int reservedShelterID;
+
     private boolean restore = false;
 
     private boolean loaded = false;
@@ -44,10 +49,17 @@ public class DashboardActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         final TextView dashboardWelcomeText = findViewById(R.id.DashboardWelcomeText);
         final TextView dashboardAdminText = findViewById(R.id.DashboardAdminText);
+        final TextView dashboardBedText = findViewById(R.id.DashboardBedText);
+        final TextView shelterText = findViewById(R.id.shelterText);
 
         final PreRegisteredShelters preRegisteredShelters = PreRegisteredShelters.getInstance();
 
         preRegisteredShelters.clearAllShelters();
+
+        username = User.getUsername();
+        admin = User.getAdmin();
+        reservedBeds = User.getReservedBeds();
+        reservedShelterID = User.getReservedShelterID();
 
 
         if (!loaded) {
@@ -101,9 +113,19 @@ public class DashboardActivity extends AppCompatActivity {
                                 preRegisteredShelters.addShelter(temp);
 
 
+
                             }
                             loaded = true;
 
+                            if (reservedShelterID == 0) {
+                                shelterText.setText("View Shelter List to Select a Shelter.");
+                            } else{
+                                for(Shelter s: preRegisteredShelters.getShelters()) {
+                                    if (reservedShelterID == Integer.parseInt(s.getKey())) {
+                                        shelterText.setText("Shelter: " + s.getName());
+                                    }
+                                }
+                            }
 
                         } else {
                             cancel = true;
@@ -126,9 +148,8 @@ public class DashboardActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        if (intent.getStringExtra("username") != null) {
-            username = intent.getStringExtra("username");
-            admin = intent.getIntExtra("admin", 0);
+
+
 
 
             dashboardWelcomeText.setText("Welcome to the Dashboard, " + username + "!");
@@ -138,17 +159,19 @@ public class DashboardActivity extends AppCompatActivity {
             } else {
                 dashboardAdminText.setText("You are currently a User.");
             }
-        } else {
-            String rUsername = savedInstanceState.getString("username");
-            int rAdmin = savedInstanceState.getInt("admin");
-            dashboardWelcomeText.setText("Welcome to the Dashboard, " + rUsername + "!");
+            dashboardBedText.setText("Current number of reserved beds: " + reservedBeds);
 
-            if (rAdmin == 1) {
-                dashboardAdminText.setText("You are currently an Admin!");
-            } else {
-                dashboardAdminText.setText("You are currently a User.");
-            }
-        }
+//            if (reservedShelterID == 0) {
+//                shelterText.setText("View Shelter List to Select a Shelter.");
+//            } else{
+//                for(Shelter s: preRegisteredShelters.getShelters()) {
+//                    if (reservedShelterID == Integer.parseInt(s.getKey())) {
+//                        shelterText.setText("Shelter: " + s.getName());
+//                    }
+//                }
+//            }
+
+
         logoutButton = (Button) findViewById(R.id.logoutButton);
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -180,6 +203,27 @@ public class DashboardActivity extends AppCompatActivity {
             }
         });
 
+        releaseButton = (Button) findViewById(R.id.bedReleaseButton);
+
+        if (User.getReservedBeds() <= 0) {
+            releaseButton.setVisibility(View.INVISIBLE);
+        }
+
+        releaseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                User.setReservedShelterID(0);
+                User.setReservedBeds(0);
+                // Set User Values to Zero and Add Back to Shelter using PHP
+                finish();
+                startActivity(getIntent());
+            }
+        });
+
+    }
+
+    @Override
+    public void onBackPressed() {
     }
 
     @Override

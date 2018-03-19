@@ -36,6 +36,7 @@ import android.widget.TextView;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
+import com.example.navi.m4projectsetupuserstoriesandloginlogout.Models.User;
 import com.example.navi.m4projectsetupuserstoriesandloginlogout.R;
 
 import org.json.JSONException;
@@ -256,10 +257,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                             //mAuthTask.execute((Void) null);
                             String username = jsonResponse.getString("username");
                             int admin = jsonResponse.getInt("admin");
+                            int reservedBeds = jsonResponse.getInt("reservedBeds");
+                            int reservedShelterID = jsonResponse.getInt("reservedShelter_id");
+
+                            new User(username,admin,reservedBeds,reservedShelterID);
 
                             Intent loginIntent = new Intent(LoginActivity.this, com.example.navi.m4projectsetupuserstoriesandloginlogout.Controllers.DashboardActivity.class);
-                            loginIntent.putExtra("username", username);
-                            loginIntent.putExtra("admin", admin);
                             startActivity(loginIntent);
                         } else {
                             showProgress(false);

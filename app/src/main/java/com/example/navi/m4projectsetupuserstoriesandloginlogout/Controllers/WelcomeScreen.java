@@ -56,6 +56,11 @@ public class WelcomeScreen extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+    }
+
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long

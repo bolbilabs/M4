@@ -23,6 +23,7 @@ import org.json.JSONObject;
 
 public class RegisterActivity extends AppCompatActivity {
     boolean cancel = false;
+    boolean processing = false;
 
     private boolean isUsernameValid(String username) {
         return username.length() > 0;
@@ -90,8 +91,8 @@ public class RegisterActivity extends AppCompatActivity {
 
                 if (cancel) {
                     focusView.requestFocus();
-                } else {
-
+                } else if (!processing) {
+                    processing = true;
                     Response.Listener<String> responseListener = new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
@@ -103,6 +104,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 if (success) {
                                     Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                                     RegisterActivity.this.startActivity(intent);
+                                    processing = false;
 
                                 } else {
                                     AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
@@ -111,10 +113,11 @@ public class RegisterActivity extends AppCompatActivity {
                                             .create()
                                             .show();
                                     cancel = true;
+                                    processing = false;
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
-
+                                processing = false;
                             }
                         }
                     };
@@ -136,6 +139,7 @@ public class RegisterActivity extends AppCompatActivity {
                         public void onFinish() {
                             if (!cancel) {
                                 cancel = true;
+                                processing = false;
                                 pbLoading.setVisibility(View.INVISIBLE);
                                 AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
                                 builder.setMessage("Unable to communicate with the server. Please check your connection and try again later.")

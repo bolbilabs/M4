@@ -3,6 +3,7 @@ package com.example.navi.m4projectsetupuserstoriesandloginlogout.Controllers;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
@@ -33,6 +34,8 @@ import org.json.JSONObject;
  */
 public class ShelterDetailActivity extends AppCompatActivity {
     EditText input;
+    private boolean processing;
+    private boolean cancel;
 
 
 
@@ -44,6 +47,8 @@ public class ShelterDetailActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         final PreRegisteredShelters preRegisteredShelters = PreRegisteredShelters.getInstance();
+        processing = false;
+        cancel = false;
 
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -65,6 +70,7 @@ public class ShelterDetailActivity extends AppCompatActivity {
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                cancel = true;
                 dialogInterface.dismiss();
             }
         });
@@ -86,56 +92,81 @@ public class ShelterDetailActivity extends AppCompatActivity {
 //                        .setAction("Action", null).show();
 
                     ad.show();
+                        ad.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                cancel = false;
+                                if (!processing) {
+                                    if (!(input.getText().toString().equals("")) && isReserveValid(Integer.parseInt(input.getText().toString()))) {
+                                        processing = true;
+                                        int reservedBeds = Integer.parseInt(input.getText().toString());
+                                        int reservedShelter_id = Integer.parseInt(preRegisteredShelters.getCurrentShelter().getKey());
+                                        String username = User.getUsername();
 
-                    ad.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            if (!(input.getText().toString().equals("")) && isReserveValid(Integer.parseInt(input.getText().toString()))) {
-                                int reservedBeds = Integer.parseInt(input.getText().toString());
-                                int reservedShelter_id = Integer.parseInt(preRegisteredShelters.getCurrentShelter().getKey());
-                                String username = User.getUsername();
 
+                                        Response.Listener<String> responseListener = new Response.Listener<String>() {
+                                            @Override
+                                            public void onResponse(String response) {
+                                                if (!cancel) {
+                                                    try {
+                                                        JSONObject jsonResponse = new JSONObject(response);
+                                                        boolean success = jsonResponse.getBoolean("success");
+                                                        if (success) {
+                                                            String text = input.getText().toString();
+                                                            User.setReservedBeds(Integer.parseInt(text));
+                                                            finish();
+                                                            User.setReservedShelterID(Integer.parseInt(preRegisteredShelters.getCurrentShelter().getKey()));
+                                                            Intent dashboardScreenIntent = new Intent(ShelterDetailActivity.this, com.example.navi.m4projectsetupuserstoriesandloginlogout.Controllers.DashboardActivity.class);
+                                                            startActivity(dashboardScreenIntent);
+                                                            ad.dismiss();
+                                                            processing = false;
+                                                            cancel = true;
+                                                        } else {
+                                                            input.setError("We're sorry, but your reservation exceeds maximum occupancy.");
+                                                            processing = false;
+                                                            cancel = true;
 
+                                                        }
+                                                    } catch (JSONException e) {
+                                                        e.printStackTrace();
+                                                        processing = false;
+                                                        cancel = true;
+                                                    }
+                                                }
+                                            }
+                                        };
 
-                                Response.Listener<String> responseListener = new Response.Listener<String>() {
-                                    @Override
-                                    public void onResponse(String response) {
-                                        try {
-                                            JSONObject jsonResponse = new JSONObject(response);
-                                            boolean success = jsonResponse.getBoolean("success");
-                                            if (success) {
-                                                String text = input.getText().toString();
-                                                User.setReservedBeds(Integer.parseInt(text));
-                                                finish();
-                                                User.setReservedShelterID(Integer.parseInt(preRegisteredShelters.getCurrentShelter().getKey()));
-                                                Intent dashboardScreenIntent = new Intent(ShelterDetailActivity.this, com.example.navi.m4projectsetupuserstoriesandloginlogout.Controllers.DashboardActivity.class);
-                                                startActivity(dashboardScreenIntent);
-                                                ad.dismiss();
-                                            } else {
-                                                input.setError("We're sorry, but your reservation exceeds maximum occupancy.");
+                                        ReserveRequest reserveRequest = new ReserveRequest(reservedBeds, reservedShelter_id, username, responseListener);
+                                        RequestQueue queue = Volley.newRequestQueue(ShelterDetailActivity.this);
+                                        queue.add(reserveRequest);
+
+                                        new CountDownTimer(30000, 1000) {
+
+                                            public void onTick(long millisUntilFinished) {
 
                                             }
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
-                                        }
 
+                                            public void onFinish() {
+                                                if (!cancel) {
+                                                    cancel = true;
+                                                    processing = false;
+                                                    android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(ShelterDetailActivity.this);
+                                                    builder.setMessage("Unable to communicate with the server. Please check your connection and try again later.")
+                                                            .setNegativeButton("Retry", null)
+                                                            .create()
+                                                            .show();
+
+                                                }
+                                            }
+                                        }.start();
+
+
+                                    } else {
+                                        input.setError("Please enter a valid Bed count (1-6).");
                                     }
-                                };
-
-                                ReserveRequest reserveRequest = new ReserveRequest(reservedBeds, reservedShelter_id, username, responseListener);
-                                RequestQueue queue = Volley.newRequestQueue(ShelterDetailActivity.this);
-                                queue.add(reserveRequest);
-
-
-
-
-                            } else {
-                                input.setError("Please enter a valid Bed count (1-6).");
-
+                                }
                             }
-                        }
-                    });
-
+                        });
 
                 }
             });

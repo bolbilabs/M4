@@ -3,6 +3,7 @@ package com.example.navi.m4projectsetupuserstoriesandloginlogout.Controllers;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -40,6 +41,8 @@ public class DashboardActivity extends AppCompatActivity {
 
     boolean cancel = false;
 
+    private boolean processing;
+
 
 
     @Override
@@ -54,6 +57,7 @@ public class DashboardActivity extends AppCompatActivity {
         final TextView shelterText = findViewById(R.id.shelterText);
 
         final PreRegisteredShelters preRegisteredShelters = PreRegisteredShelters.getInstance();
+        processing = false;
 
         preRegisteredShelters.clearAllShelters();
 
@@ -213,36 +217,66 @@ public class DashboardActivity extends AppCompatActivity {
         releaseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                cancel = false;
+                if (!processing) {
+                    processing = true;
+                    Response.Listener<String> responseListener = new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            if (!cancel) {
+                                try {
+                                    JSONObject jsonResponse = new JSONObject(response);
+                                    boolean success = jsonResponse.getBoolean("success");
+                                    if (success) {
+                                        User.setReservedShelterID(0);
+                                        User.setReservedBeds(0);
+                                        finish();
+                                        startActivity(getIntent());
+                                        processing = false;
+                                        cancel = true;
+                                    } else {
+                                        AlertDialog.Builder builder = new AlertDialog.Builder(DashboardActivity.this);
+                                        builder.setMessage("An unknown error occurred.")
+                                                .setNegativeButton("Retry", null)
+                                                .create()
+                                                .show();
+                                        processing = false;
+                                        cancel = true;
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                    processing = false;
+                                    cancel = true;
+                                }
+                            }
+                        }
+                    };
 
-                Response.Listener<String> responseListener = new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonResponse = new JSONObject(response);
-                            boolean success = jsonResponse.getBoolean("success");
-                            if (success) {
-                                User.setReservedShelterID(0);
-                                User.setReservedBeds(0);
-                                // Set User Values to Zero and Add Back to Shelter using PHP
-                                finish();
-                                startActivity(getIntent());
-                            } else {
+                    ReleaseRequest releaseRequest = new ReleaseRequest(reservedBeds, reservedShelterID, username, responseListener);
+                    RequestQueue queue = Volley.newRequestQueue(DashboardActivity.this);
+                    queue.add(releaseRequest);
+
+
+
+                    new CountDownTimer(30000, 1000) {
+
+                        public void onTick(long millisUntilFinished) {
+
+                        }
+
+                        public void onFinish() {
+                            if (!cancel) {
+                                cancel = true;
+                                processing = false;
                                 AlertDialog.Builder builder = new AlertDialog.Builder(DashboardActivity.this);
-                                builder.setMessage("An unknown error occurred.")
+                                builder.setMessage("Unable to communicate with the server. Please check your connection and try again later.")
                                         .setNegativeButton("Retry", null)
                                         .create()
                                         .show();
                             }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
                         }
-
-                    }
-                };
-
-                ReleaseRequest releaseRequest = new ReleaseRequest(reservedBeds, reservedShelterID, username, responseListener);
-                RequestQueue queue = Volley.newRequestQueue(DashboardActivity.this);
-                queue.add(releaseRequest);
+                    }.start();
+                }
             }
         });
 

@@ -68,7 +68,7 @@ public class ShelterDetailFragment extends Fragment {
         if (mItem != null) {
             ((TextView) rootView.findViewById(R.id.shelter_detail)).setText("Address: " + mItem.getAddress());
             ((TextView) rootView.findViewById(R.id.shelter_detail)).append("\nPhone Number: " + mItem.getPhoneNumber());
-            ((TextView) rootView.findViewById(R.id.shelter_detail)).append("\nCapacity: "  + mItem.getCapacity());
+            ((TextView) rootView.findViewById(R.id.shelter_detail)).append("\nVacancies: "  + mItem.getCapacity());
             ((TextView) rootView.findViewById(R.id.shelter_detail)).append("\nNotes: " + mItem.getNotes());
             ((TextView) rootView.findViewById(R.id.shelter_detail)).append("\nRestrictions: " + mItem.getRestrictions());
         }

@@ -19,9 +19,9 @@ import java.util.Map;
  */
 
 public class ShelterDataRequest extends StringRequest {
-    //    private static final String SHELTER_REQUEST_URL = "http://136.59.225.27/Register.php";
+        private static final String SHELTER_REQUEST_URL = "http://136.59.225.27/ShelterRequest.php";
     //private static final String SHELTER_REQUEST_URL = "http://192.168.1.19/ShelterRequest.php";
-    private static final String SHELTER_REQUEST_URL = "http://98.252.206.56/ShelterRequest.php";
+//    private static final String SHELTER_REQUEST_URL = "http://98.252.206.56/ShelterRequest.php";
 
 
     public ShelterDataRequest(Response.Listener<String> listener) {

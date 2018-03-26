@@ -11,9 +11,9 @@ import java.util.Map;
  */
 
 public class ReleaseRequest extends StringRequest {
-    //    private static final String REGISTER_REQUEST_URL = "http://136.59.225.27/Register.php";
-    //private static final String REGISTER_REQUEST_URL = "http://192.168.1.19/Register.php";
-    private static final String RELEASE_REQUEST_URL = "http://98.252.206.56/Release.php";
+        private static final String RELEASE_REQUEST_URL = "http://136.59.225.27/Release.php";
+    //private static final String RELEASE_REQUEST_URL = "http://192.168.1.19/Release.php";
+//    private static final String RELEASE_REQUEST_URL = "http://98.252.206.56/Release.php";
 
     private Map<String, String> params;
 

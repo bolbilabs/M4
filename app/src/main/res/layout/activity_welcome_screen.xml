@@ -23,7 +23,6 @@
 
     <include
         layout="@layout/content_welcome_screen"
-        android:layout_height="486dp"
         tools:layout_editor_absoluteY="173dp" />
 
     <android.support.design.widget.FloatingActionButton

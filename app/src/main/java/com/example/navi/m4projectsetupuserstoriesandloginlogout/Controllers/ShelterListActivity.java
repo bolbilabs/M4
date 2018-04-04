@@ -175,7 +175,9 @@ public class ShelterListActivity extends AppCompatActivity {
 
                 @Override
                 protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-                    mValues = (ArrayList<Shelter>) filterResults.values;
+                    if (filterResults.values instanceof ArrayList) {
+                        mValues = (ArrayList<Shelter>) filterResults.values;
+                    }
                     notifyDataSetChanged();
                 }
             };

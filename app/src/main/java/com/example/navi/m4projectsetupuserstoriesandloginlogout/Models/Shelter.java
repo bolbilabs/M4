@@ -40,4 +40,15 @@ public class Shelter {
     public String getAddress() {return address;}
     public String getNotes() {return notes;}
     public String getPhoneNumber() {return phoneNumber;}
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) {
+            return false;
+        }
+        if (!(o instanceof Shelter)) {
+            return false;
+        }
+        return this.name.equals(((Shelter)o).name);
+    }
 }

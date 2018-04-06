@@ -8,7 +8,7 @@ final class ShelterSearch {
         //do not use
     }
 
-    // see if shelter should be included in filtered list or
+    // see if shelter should be included in filtered list
     static boolean filterShelter(String charText, Shelter s) {
         charText = charText.toLowerCase();
         String res = s.getRestrictions().toLowerCase();

@@ -20,8 +20,10 @@ public class ShelterEqualTest {
 
     @Test
     public void equals() throws Exception {
-        assertFalse("Comparison failed for null", shelterName.equals(null));
-        assertFalse("If it's not a shelter", shelterName.equals(""));
+        assertFalse("Comparison fails for null", shelterName.equals(null));
+        assertFalse("It's not a shelter", shelterName.equals(""));
+        assertTrue("It does have the same shelter name", shelterName.equals("Shelter Bob"));
+        assertFalse("The shelter name is different from the actual one", shelterName.equals("Shelter Sally"));
         // Need to make sure it's true if it's the same shelter shelterName.equals(shelterName)
         // Need to make sure if it's a shelter with a different name, it's false. Make up something new
         //with this one.

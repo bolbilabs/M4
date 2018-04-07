@@ -31,8 +31,8 @@ public class User {
         reservedShelterID = shelterID;
     }
 
-    private boolean isReserveValid(int reserveCount) {
-        return (reserveCount > 0) && (reserveCount < 7);
+    public boolean isReserveValid() {
+        return ((reservedBeds > 0) && (reservedBeds < 7));
     }
 
 }

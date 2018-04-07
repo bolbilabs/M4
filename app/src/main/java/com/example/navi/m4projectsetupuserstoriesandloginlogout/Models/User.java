@@ -30,4 +30,9 @@ public class User {
     public static void setReservedShelterID(int shelterID) {
         reservedShelterID = shelterID;
     }
+
+    private boolean isReserveValid(int reserveCount) {
+        return (reserveCount > 0) && (reserveCount < 7);
+    }
+
 }

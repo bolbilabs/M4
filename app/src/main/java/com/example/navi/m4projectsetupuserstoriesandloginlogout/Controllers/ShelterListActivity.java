@@ -97,7 +97,6 @@ public class ShelterListActivity extends AppCompatActivity {
         setupRecyclerView((RecyclerView) recyclerView);
 
         // Associate searchable configuration with the SearchView
-        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         SearchView searchView = (SearchView) findViewById(R.id.search_bar);
         searchView.setIconified(false);
 

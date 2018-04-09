@@ -20,7 +20,9 @@ import com.example.navi.m4projectsetupuserstoriesandloginlogout.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
+/**
+ * 
+ */
 public class RegisterActivity extends AppCompatActivity {
     private boolean cancel = false;
     private boolean processing = false;

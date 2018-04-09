@@ -4,8 +4,6 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -23,6 +21,13 @@ import com.example.navi.m4projectsetupuserstoriesandloginlogout.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
+/**
+ * This indicates what is shown on the dashboard by default and
+ * depending on the user's actions. Examples include the welcome text, your title
+ * (i.e. user, admin), and the item titles of a shelter.
+ *
+ */
 public class DashboardActivity extends AppCompatActivity {
 
     private Button logoutButton;

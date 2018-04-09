@@ -159,8 +159,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
     }
     /**
-     * when cancel is pressed, go back to welcome page
-     * @param view
+     * When cancel is pressed, go back to welcome page
+     * @param view the screen
      */
     public void onCancelPressed(View view) {
         Intent cancelIntent = new Intent(LoginActivity.this, com.example.navi.m4projectsetupuserstoriesandloginlogout.Controllers.WelcomeScreen.class);
@@ -168,8 +168,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     /**
-     * when log in is pressed, attempt to login
-     * @param view
+     * When log in is pressed, attempt to login
+     * @param view the screen
      */
     public void onLoginPressed(View view) {
         attemptLogin();

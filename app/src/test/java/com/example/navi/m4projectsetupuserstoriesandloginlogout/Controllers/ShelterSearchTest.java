@@ -1,7 +1,5 @@
 package com.example.navi.m4projectsetupuserstoriesandloginlogout.Controllers;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;

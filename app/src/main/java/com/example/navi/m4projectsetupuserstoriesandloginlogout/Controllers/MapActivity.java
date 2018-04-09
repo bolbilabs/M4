@@ -4,8 +4,6 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.SearchView;
 
 import com.example.navi.m4projectsetupuserstoriesandloginlogout.Models.PreRegisteredShelters;
@@ -15,15 +13,12 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import com.example.navi.m4projectsetupuserstoriesandloginlogout.R;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
-
 
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback {
 

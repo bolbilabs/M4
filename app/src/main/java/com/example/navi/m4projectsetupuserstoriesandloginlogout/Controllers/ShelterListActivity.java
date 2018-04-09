@@ -16,27 +16,14 @@ import android.widget.Filterable;
 import android.widget.Filter;
 import android.widget.SearchView;
 import android.widget.TextView;
-import android.view.MenuItem;
-import android.support.v4.view.MenuItemCompat;
 import android.app.SearchManager;
 
-import android.support.v7.app.ActionBar;
-
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.toolbox.Volley;
 import com.example.navi.m4projectsetupuserstoriesandloginlogout.Models.PreRegisteredShelters;
 import com.example.navi.m4projectsetupuserstoriesandloginlogout.Models.Shelter;
 import com.example.navi.m4projectsetupuserstoriesandloginlogout.R;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 /**
  * An activity representing a list of Shelters. This activity

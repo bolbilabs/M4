@@ -16,27 +16,14 @@ import android.widget.Filterable;
 import android.widget.Filter;
 import android.widget.SearchView;
 import android.widget.TextView;
-import android.view.MenuItem;
-import android.support.v4.view.MenuItemCompat;
 import android.app.SearchManager;
 
-import android.support.v7.app.ActionBar;
-
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.toolbox.Volley;
 import com.example.navi.m4projectsetupuserstoriesandloginlogout.Models.PreRegisteredShelters;
 import com.example.navi.m4projectsetupuserstoriesandloginlogout.Models.Shelter;
 import com.example.navi.m4projectsetupuserstoriesandloginlogout.R;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 /**
  * An activity representing a list of Shelters. This activity
@@ -57,7 +44,8 @@ public class ShelterListActivity extends AppCompatActivity {
 
 
     private SimpleShelterRecyclerViewAdapter mAdaptor
-            = new SimpleShelterRecyclerViewAdapter(this, PreRegisteredShelters.getInstance().getShelters(), mTwoPane);
+            = new SimpleShelterRecyclerViewAdapter(this, PreRegisteredShelters.getInstance()
+            .getShelters(), mTwoPane);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,7 +115,8 @@ public class ShelterListActivity extends AppCompatActivity {
     }
 
     public static class SimpleShelterRecyclerViewAdapter
-            extends RecyclerView.Adapter<SimpleShelterRecyclerViewAdapter.ViewHolder> implements Filterable {
+            extends RecyclerView.Adapter<SimpleShelterRecyclerViewAdapter.ViewHolder>
+            implements Filterable {
 
         private final ShelterListActivity mParentActivity;
         private List<Shelter> mValues;
@@ -148,7 +137,8 @@ public class ShelterListActivity extends AppCompatActivity {
                 @Override
                 protected FilterResults performFiltering(CharSequence charSequence) {
                     String charString = charSequence.toString();
-                    PreRegisteredShelters preRegisteredShelters = PreRegisteredShelters.getInstance();
+                    PreRegisteredShelters preRegisteredShelters
+                            = PreRegisteredShelters.getInstance();
                     List<Shelter> shelter_list;
                     if (charString.isEmpty()) {
                         shelter_list = preRegisteredShelters.getShelters();
@@ -173,7 +163,8 @@ public class ShelterListActivity extends AppCompatActivity {
                 }
 
                 @Override
-                protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                protected void publishResults(CharSequence charSequence,
+                                              FilterResults filterResults) {
                     mValues = (ArrayList<Shelter>) filterResults.values;
                     notifyDataSetChanged();
                 }
@@ -205,7 +196,8 @@ public class ShelterListActivity extends AppCompatActivity {
                     if (mTwoPane) {
                         //if a two pane window, we change the contents on the main screen
                         Bundle arguments = new Bundle();
-                        arguments.putString(ShelterDetailFragment.ARG_ITEM_ID, holder.mValue.getKey());
+                        arguments.putString(ShelterDetailFragment.ARG_ITEM_ID,
+                                holder.mValue.getKey());
 
                         ShelterDetailFragment fragment = new ShelterDetailFragment();
                         fragment.setArguments(arguments);

@@ -17,7 +17,8 @@ public class ReleaseRequest extends StringRequest {
 
     private Map<String, String> params;
 
-    public ReleaseRequest(int reservedBeds, int reservedShelter_id, String username, Response.Listener<String> listener) {
+    public ReleaseRequest(int reservedBeds, int reservedShelter_id, String username,
+                          Response.Listener<String> listener) {
         super(Method.POST, RELEASE_REQUEST_URL, listener, null);
         params = new HashMap<>();
         params.put("reservedBeds",reservedBeds + "");

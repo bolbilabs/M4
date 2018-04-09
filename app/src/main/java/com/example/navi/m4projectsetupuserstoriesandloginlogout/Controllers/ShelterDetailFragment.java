@@ -52,7 +52,8 @@ public class ShelterDetailFragment extends Fragment {
             mItem = preRegisteredShelters.getCurrentShelter();
 
             Activity activity = this.getActivity();
-            CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
+            CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity
+                    .findViewById(R.id.toolbar_layout);
             if (appBarLayout != null) {
                 appBarLayout.setTitle(mItem.getName());
             }
@@ -66,11 +67,16 @@ public class ShelterDetailFragment extends Fragment {
 
         // Show the dummy content as text in a TextView.
         if (mItem != null) {
-            ((TextView) rootView.findViewById(R.id.shelter_detail)).setText("Address: " + mItem.getAddress());
-            ((TextView) rootView.findViewById(R.id.shelter_detail)).append("\nPhone Number: " + mItem.getPhoneNumber());
-            ((TextView) rootView.findViewById(R.id.shelter_detail)).append("\nVacancies: "  + mItem.getCapacity());
-            ((TextView) rootView.findViewById(R.id.shelter_detail)).append("\nNotes: " + mItem.getNotes());
-            ((TextView) rootView.findViewById(R.id.shelter_detail)).append("\nRestrictions: " + mItem.getRestrictions());
+            ((TextView) rootView.findViewById(R.id.shelter_detail)).setText("Address: "
+                    + mItem.getAddress());
+            ((TextView) rootView.findViewById(R.id.shelter_detail)).append("\nPhone Number: "
+                    + mItem.getPhoneNumber());
+            ((TextView) rootView.findViewById(R.id.shelter_detail)).append("\nVacancies: "
+                    + mItem.getCapacity());
+            ((TextView) rootView.findViewById(R.id.shelter_detail)).append("\nNotes: "
+                    + mItem.getNotes());
+            ((TextView) rootView.findViewById(R.id.shelter_detail)).append("\nRestrictions: "
+                    + mItem.getRestrictions());
         }
 
         return rootView;

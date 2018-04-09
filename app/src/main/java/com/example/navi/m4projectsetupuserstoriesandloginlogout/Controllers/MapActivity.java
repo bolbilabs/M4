@@ -86,8 +86,10 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
 
         //iterate through the list and add a pin for each element in the model
         for (Shelter s : preRegisteredShelters.getShelters()) {
-            LatLng loc = new LatLng(Double.parseDouble(s.getLatitude()), Double.parseDouble(s.getLongitude()));
-            mMap.addMarker(new MarkerOptions().position(loc).title(s.getName()).snippet(s.getPhoneNumber()));
+            LatLng loc = new LatLng(Double.parseDouble(s.getLatitude()),
+                    Double.parseDouble(s.getLongitude()));
+            mMap.addMarker(new MarkerOptions().position(loc)
+                    .title(s.getName()).snippet(s.getPhoneNumber()));
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(loc,10.0f));
         }
     }
@@ -118,8 +120,10 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         mMap.clear();
 
         for (Shelter s : shelter_list) {
-            LatLng loc = new LatLng(Double.parseDouble(s.getLatitude()), Double.parseDouble(s.getLongitude()));
-            mMap.addMarker(new MarkerOptions().position(loc).title(s.getName()).snippet(s.getPhoneNumber()));
+            LatLng loc = new LatLng(Double.parseDouble(s.getLatitude()),
+                    Double.parseDouble(s.getLongitude()));
+            mMap.addMarker(new MarkerOptions().position(loc)
+                    .title(s.getName()).snippet(s.getPhoneNumber()));
         }
     }
 }

@@ -33,7 +33,7 @@ import org.json.JSONObject;
  * in a {@link ShelterListActivity}.
  */
 public class ShelterDetailActivity extends AppCompatActivity {
-    EditText input;
+    private EditText input;
     private boolean processing;
     private boolean cancel;
 

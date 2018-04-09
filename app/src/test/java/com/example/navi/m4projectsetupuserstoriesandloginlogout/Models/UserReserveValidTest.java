@@ -5,6 +5,8 @@ import org.junit.Test;
 
 /**
  * Created by dfriedman32 on 4/7/18.
+ *
+ * Unit test for isReserveValid()
  */
 public class UserReserveValidTest {
     private User user;

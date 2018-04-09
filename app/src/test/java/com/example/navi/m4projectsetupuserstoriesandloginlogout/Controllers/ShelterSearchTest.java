@@ -8,6 +8,8 @@ import com.example.navi.m4projectsetupuserstoriesandloginlogout.Models.Shelter;
 
 /**
  * Created by Kristen on 4/6/18.
+ *
+ * Unit test for filterShelter()
  */
 public class ShelterSearchTest {
 

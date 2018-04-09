@@ -2,6 +2,8 @@ package com.example.navi.m4projectsetupuserstoriesandloginlogout.Models;
 
 /**
  * Created by dfriedman32 on 3/18/18.
+ *
+ * class representing a User
  */
 
 public class User {

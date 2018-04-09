@@ -100,6 +100,9 @@ public class Shelter {
         if (o == null) {
             return false;
         }
-        return o instanceof Shelter && this.name.equals(((Shelter) o).name);
+        if (!(o instanceof Shelter)) {
+            return false;
+        }
+        return this.name.equals(((Shelter) o).name);
     }
 }

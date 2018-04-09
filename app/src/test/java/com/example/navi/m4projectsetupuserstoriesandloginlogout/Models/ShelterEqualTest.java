@@ -16,12 +16,18 @@ public class ShelterEqualTest {
     private Shelter testName;
 
     @Before
+    /**
+     * Throws exception if the setup is erroneous.
+     */
     public void setUp() throws Exception {
         shelterName = new Shelter("1", "Shelter Bob", "2", "3", "4", "5",
                 "6", "7", "8");
     }
 
     @Test
+    /**
+     * Throws exception if the following tests have issues.
+     */
     public void equals() throws Exception {
         testName = new Shelter("1", null, "2", "3", "4", "5",
                 "6", "7", "8");

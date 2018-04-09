@@ -69,15 +69,4 @@ public class User {
         return ((reservedBeds > 0) && (reservedBeds < 7));
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (o == null) {
-            return false;
-        }
-        if (!(o instanceof User)) {
-            return false;
-        }
-        return this.username.equals(((User) o).username);
-    }
-
 }

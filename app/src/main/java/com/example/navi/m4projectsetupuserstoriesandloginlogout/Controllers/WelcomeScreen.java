@@ -11,6 +11,9 @@ import android.widget.TextView;
 
 import com.example.navi.m4projectsetupuserstoriesandloginlogout.R;
 
+/**
+ * Sets up interface of the Welcome Screen.
+ */
 public class WelcomeScreen extends AppCompatActivity {
 
 

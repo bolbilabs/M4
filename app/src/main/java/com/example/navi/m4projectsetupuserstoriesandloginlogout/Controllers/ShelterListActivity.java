@@ -16,7 +16,6 @@ import android.widget.Filterable;
 import android.widget.Filter;
 import android.widget.SearchView;
 import android.widget.TextView;
-import android.app.SearchManager;
 
 import com.example.navi.m4projectsetupuserstoriesandloginlogout.Models.PreRegisteredShelters;
 import com.example.navi.m4projectsetupuserstoriesandloginlogout.Models.Shelter;

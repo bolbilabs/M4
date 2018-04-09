@@ -20,6 +20,13 @@ public class ReleaseRequest extends StringRequest {
 
     private Map<String, String> params;
 
+    /**
+     *
+     * @param reservedBeds number of reserved beds
+     * @param reservedShelter_id number of shelter ID
+     * @param username the username
+     * @param listener the database url
+     */
     public ReleaseRequest(int reservedBeds, int reservedShelter_id, String username,
                           Response.Listener<String> listener) {
         super(Method.POST, RELEASE_REQUEST_URL, listener, null);

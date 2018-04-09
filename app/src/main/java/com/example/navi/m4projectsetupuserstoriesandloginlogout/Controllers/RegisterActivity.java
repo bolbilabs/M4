@@ -22,8 +22,8 @@ import org.json.JSONObject;
 
 
 public class RegisterActivity extends AppCompatActivity {
-    boolean cancel = false;
-    boolean processing = false;
+    private boolean cancel = false;
+    private boolean processing = false;
 
     private boolean isUsernameValid(String username) {
         return username.length() > 0;

@@ -92,7 +92,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
 
 
 
-    public void filtering(CharSequence charSequence) {
+    private void filtering(CharSequence charSequence) {
         String charString = charSequence.toString();
         PreRegisteredShelters preRegisteredShelters = PreRegisteredShelters.getInstance();
         List<Shelter> shelter_list;

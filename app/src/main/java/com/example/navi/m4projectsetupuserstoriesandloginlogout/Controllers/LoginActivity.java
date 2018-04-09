@@ -74,7 +74,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private View mProgressView;
     private View mLoginFormView;
 
-    boolean cancel = false;
+     private boolean cancel = false;
 
     @Override
     public void onBackPressed() {

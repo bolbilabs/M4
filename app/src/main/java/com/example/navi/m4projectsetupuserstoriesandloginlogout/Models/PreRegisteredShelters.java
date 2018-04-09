@@ -16,7 +16,7 @@ public class PreRegisteredShelters {
     private Shelter currentShelter;
     private static final int SIZE = 13;
 
-    public PreRegisteredShelters() {
+    private PreRegisteredShelters() {
         shelters = new ArrayList<Shelter>();
     }
 

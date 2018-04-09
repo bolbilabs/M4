@@ -37,7 +37,7 @@ public class DashboardActivity extends AppCompatActivity {
 
     private boolean loaded = false;
 
-    boolean cancel = false;
+    private boolean cancel = false;
 
     private boolean processing;
 

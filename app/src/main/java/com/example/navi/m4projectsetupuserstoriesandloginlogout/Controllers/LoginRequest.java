@@ -11,7 +11,7 @@ import java.util.Map;
  * Created by dfriedman32 on 2/17/18.
  */
 
-public class LoginRequest extends StringRequest {
+class LoginRequest extends StringRequest {
     private static final String LOGIN_REQUEST_URL = "http://136.59.225.27/Login.php";
     //private static final String LOGIN_REQUEST_URL = "http://192.168.1.19/Login.php";
 //    private static final String LOGIN_REQUEST_URL = "http://98.252.206.56/Login.php";

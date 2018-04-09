@@ -2,10 +2,7 @@ package com.example.navi.m4projectsetupuserstoriesandloginlogout.Controllers;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.widget.Button;
 import android.view.View;
 import android.view.Menu;
@@ -14,6 +11,9 @@ import android.widget.TextView;
 
 import com.example.navi.m4projectsetupuserstoriesandloginlogout.R;
 
+/**
+ * Sets up interface of the Welcome Screen.
+ */
 public class WelcomeScreen extends AppCompatActivity {
 
 
@@ -32,7 +32,8 @@ public class WelcomeScreen extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-            Intent loginIntent = new Intent(WelcomeScreen.this, com.example.navi.m4projectsetupuserstoriesandloginlogout.Controllers.LoginActivity.class);
+            Intent loginIntent = new Intent(WelcomeScreen.this, com.example.navi
+                    .m4projectsetupuserstoriesandloginlogout.Controllers.LoginActivity.class);
             startActivity(loginIntent);
             }
         });
@@ -42,7 +43,9 @@ public class WelcomeScreen extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                Intent registerIntent = new Intent(WelcomeScreen.this, com.example.navi.m4projectsetupuserstoriesandloginlogout.Controllers.RegisterActivity.class);
+                Intent registerIntent = new Intent(WelcomeScreen.this,
+                        com.example.navi.m4projectsetupuserstoriesandloginlogout.Controllers
+                                .RegisterActivity.class);
                 startActivity(registerIntent);
             }
         });

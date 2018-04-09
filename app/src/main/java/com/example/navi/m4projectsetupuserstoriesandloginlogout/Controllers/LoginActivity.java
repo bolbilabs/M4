@@ -30,7 +30,6 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
@@ -75,7 +74,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private View mProgressView;
     private View mLoginFormView;
 
-    boolean cancel = false;
+     private boolean cancel = false;
 
     @Override
     public void onBackPressed() {
@@ -159,17 +158,18 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
     }
     /**
-     * when cancel is pressed, go back to welcome page
-     * @param view
+     * When cancel is pressed, go back to welcome page
+     * @param view the screen
      */
     public void onCancelPressed(View view) {
-        Intent cancelIntent = new Intent(LoginActivity.this, com.example.navi.m4projectsetupuserstoriesandloginlogout.Controllers.WelcomeScreen.class);
+        Intent cancelIntent = new Intent(LoginActivity.this, com.example.navi
+                .m4projectsetupuserstoriesandloginlogout.Controllers.WelcomeScreen.class);
         startActivity(cancelIntent);
     }
 
     /**
-     * when log in is pressed, attempt to login
-     * @param view
+     * When log in is pressed, attempt to login
+     * @param view the screen
      */
     public void onLoginPressed(View view) {
         attemptLogin();
@@ -224,13 +224,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         // Hard coded user/admin and pass just in case the database is down
         if (username.equals("user") && password.equals("pass")) {
-            Intent loginIntent = new Intent(LoginActivity.this, com.example.navi.m4projectsetupuserstoriesandloginlogout.Controllers.DashboardActivity.class);
+            Intent loginIntent = new Intent(LoginActivity.this, com.example.navi
+                    .m4projectsetupuserstoriesandloginlogout.Controllers.DashboardActivity.class);
             loginIntent.putExtra("username", username);
             loginIntent.putExtra("admin", 0);
             startActivity(loginIntent);
         }
         if (username.equals("admin") && password.equals("pass")) {
-            Intent loginIntent = new Intent(LoginActivity.this, com.example.navi.m4projectsetupuserstoriesandloginlogout.Controllers.DashboardActivity.class);
+            Intent loginIntent = new Intent(LoginActivity.this, com.example.navi
+                    .m4projectsetupuserstoriesandloginlogout.Controllers.DashboardActivity.class);
             loginIntent.putExtra("username", username);
             loginIntent.putExtra("admin", 1);
             startActivity(loginIntent);
@@ -262,7 +264,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
                             new User(username,admin,reservedBeds,reservedShelterID);
 
-                            Intent loginIntent = new Intent(LoginActivity.this, com.example.navi.m4projectsetupuserstoriesandloginlogout.Controllers.DashboardActivity.class);
+                            Intent loginIntent = new Intent(LoginActivity.this,
+                                    com.example.navi.m4projectsetupuserstoriesandloginlogout
+                                            .Controllers.DashboardActivity.class);
                             startActivity(loginIntent);
                         } else {
                             showProgress(false);

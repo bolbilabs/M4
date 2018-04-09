@@ -7,6 +7,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Puts the most current reserved beds, the shelter it's reserving in question, and the
+ * username in the database.
+ *
  * Created by dfriedman32 on 3/19/18.
  */
 
@@ -17,7 +20,15 @@ public class ReleaseRequest extends StringRequest {
 
     private Map<String, String> params;
 
-    public ReleaseRequest(int reservedBeds, int reservedShelter_id, String username, Response.Listener<String> listener) {
+    /**
+     *
+     * @param reservedBeds number of reserved beds
+     * @param reservedShelter_id number of shelter ID
+     * @param username the username
+     * @param listener the database url
+     */
+    public ReleaseRequest(int reservedBeds, int reservedShelter_id, String username,
+                          Response.Listener<String> listener) {
         super(Method.POST, RELEASE_REQUEST_URL, listener, null);
         params = new HashMap<>();
         params.put("reservedBeds",reservedBeds + "");

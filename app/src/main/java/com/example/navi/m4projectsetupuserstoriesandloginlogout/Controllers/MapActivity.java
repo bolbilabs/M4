@@ -1,11 +1,7 @@
 package com.example.navi.m4projectsetupuserstoriesandloginlogout.Controllers;
 
-import android.app.SearchManager;
-import android.content.Context;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.SearchView;
 
 import com.example.navi.m4projectsetupuserstoriesandloginlogout.Models.PreRegisteredShelters;
@@ -15,16 +11,17 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import com.example.navi.m4projectsetupuserstoriesandloginlogout.R;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
 
-
+/**
+ * How the map feature in the app works, which includes when user selects the option, what he or
+ * she searches up, and the result, which is a specific shelter.
+ */
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
@@ -42,6 +39,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
 
 
         // Associate searchable configuration with the SearchView
+        //  SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         SearchView searchView = (SearchView) findViewById(R.id.map_filter);
 
         // listening to search query text change
@@ -88,15 +86,17 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
 
         //iterate through the list and add a pin for each element in the model
         for (Shelter s : preRegisteredShelters.getShelters()) {
-            LatLng loc = new LatLng(Double.parseDouble(s.getLatitude()), Double.parseDouble(s.getLongitude()));
-            mMap.addMarker(new MarkerOptions().position(loc).title(s.getName()).snippet(s.getPhoneNumber()));
+            LatLng loc = new LatLng(Double.parseDouble(s.getLatitude()),
+                    Double.parseDouble(s.getLongitude()));
+            mMap.addMarker(new MarkerOptions().position(loc)
+                    .title(s.getName()).snippet(s.getPhoneNumber()));
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(loc,10.0f));
         }
     }
 
 
 
-    public void filtering(CharSequence charSequence) {
+    private void filtering(CharSequence charSequence) {
         String charString = charSequence.toString();
         PreRegisteredShelters preRegisteredShelters = PreRegisteredShelters.getInstance();
         List<Shelter> shelter_list;
@@ -120,8 +120,10 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         mMap.clear();
 
         for (Shelter s : shelter_list) {
-            LatLng loc = new LatLng(Double.parseDouble(s.getLatitude()), Double.parseDouble(s.getLongitude()));
-            mMap.addMarker(new MarkerOptions().position(loc).title(s.getName()).snippet(s.getPhoneNumber()));
+            LatLng loc = new LatLng(Double.parseDouble(s.getLatitude()),
+                    Double.parseDouble(s.getLongitude()));
+            mMap.addMarker(new MarkerOptions().position(loc)
+                    .title(s.getName()).snippet(s.getPhoneNumber()));
         }
     }
 }

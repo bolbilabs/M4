@@ -20,10 +20,12 @@ import com.example.navi.m4projectsetupuserstoriesandloginlogout.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
+/**
+ * 
+ */
 public class RegisterActivity extends AppCompatActivity {
-    boolean cancel = false;
-    boolean processing = false;
+    private boolean cancel = false;
+    private boolean processing = false;
 
     private boolean isUsernameValid(String username) {
         return username.length() > 0;
@@ -102,12 +104,14 @@ public class RegisterActivity extends AppCompatActivity {
                                 pbLoading.setVisibility(View.INVISIBLE);
 
                                 if (success) {
-                                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                    Intent intent = new Intent(RegisterActivity.this,
+                                            LoginActivity.class);
                                     RegisterActivity.this.startActivity(intent);
                                     processing = false;
 
                                 } else {
-                                    AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                                    AlertDialog.Builder builder = new AlertDialog
+                                            .Builder(RegisterActivity.this);
                                     builder.setMessage("Sorry, this username is already taken.")
                                             .setNegativeButton("Retry", null)
                                             .create()
@@ -123,7 +127,8 @@ public class RegisterActivity extends AppCompatActivity {
                     };
 
 
-                    RegisterRequest registerRequest = new RegisterRequest(username, password, admin, responseListener);
+                    RegisterRequest registerRequest = new RegisterRequest(username, password,
+                            admin, responseListener);
                     RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
                     queue.add(registerRequest);
 
@@ -141,7 +146,8 @@ public class RegisterActivity extends AppCompatActivity {
                                 cancel = true;
                                 processing = false;
                                 pbLoading.setVisibility(View.INVISIBLE);
-                                AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                                AlertDialog.Builder builder = new AlertDialog
+                                        .Builder(RegisterActivity.this);
                                 builder.setMessage("Unable to communicate with the server. Please check your connection and try again later.")
                                         .setNegativeButton("Retry", null)
                                         .create()

@@ -4,8 +4,6 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -23,6 +21,13 @@ import com.example.navi.m4projectsetupuserstoriesandloginlogout.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
+/**
+ * This indicates what is shown on the dashboard by default and
+ * depending on the user's actions. Examples include the welcome text, your title
+ * (i.e. user, admin), and the item titles of a shelter.
+ *
+ */
 public class DashboardActivity extends AppCompatActivity {
 
     private Button logoutButton;
@@ -39,7 +44,7 @@ public class DashboardActivity extends AppCompatActivity {
 
     private boolean loaded = false;
 
-    boolean cancel = false;
+    private boolean cancel = false;
 
     private boolean processing;
 
@@ -71,7 +76,8 @@ public class DashboardActivity extends AppCompatActivity {
                 /*
                     CSV Reader: Uncomment if server is down.
                 */
-//            InputStream inputStream = getResources().openRawResource(+ R.raw.homeless_shelter_database);
+//            InputStream inputStream = getResources()
+//            .openRawResource(+ R.raw.homeless_shelter_database);
 //            try {
 //                Scanner scan = new Scanner(inputStream, StandardCharsets.UTF_8.toString());
 //                String line;
@@ -94,7 +100,8 @@ public class DashboardActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(String response) {
                     try {
-                        JSONObject jsonInitResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
+                        JSONObject jsonInitResponse = new JSONObject(response.substring(response
+                                .indexOf("{"), response.lastIndexOf("}") + 1));
                         boolean success = jsonInitResponse.getBoolean("success");
                         int shelterCount = jsonInitResponse.getInt("shelterCount");
                         if (success) {
@@ -108,12 +115,18 @@ public class DashboardActivity extends AppCompatActivity {
 
                             for (int i = 0; i < shelterCount; i++) {
 
-                                JSONObject jsonResponse = jsonInitResponse.getJSONObject(String.valueOf(i));
+                                JSONObject jsonResponse =
+                                        jsonInitResponse.getJSONObject(String.valueOf(i));
 
-                                temp = new Shelter(String.valueOf(jsonResponse.getInt("shelter_id")), jsonResponse.getString("name"),
-                                        String.valueOf(jsonResponse.getInt("capacity")), jsonResponse.getString("restrictions"),
-                                        jsonResponse.getString("longitude"), jsonResponse.getString("latitude"),
-                                        jsonResponse.getString("address"), jsonResponse.getString("notes"),
+                                temp = new Shelter(String.valueOf(jsonResponse
+                                        .getInt("shelter_id")),
+                                        jsonResponse.getString("name"),
+                                        String.valueOf(jsonResponse.getInt("capacity")),
+                                        jsonResponse.getString("restrictions"),
+                                        jsonResponse.getString("longitude"),
+                                        jsonResponse.getString("latitude"),
+                                        jsonResponse.getString("address"),
+                                        jsonResponse.getString("notes"),
                                         jsonResponse.getString("phoneNumber"));
                                 preRegisteredShelters.addShelter(temp);
 
@@ -151,6 +164,7 @@ public class DashboardActivity extends AppCompatActivity {
         }
         
 
+        //Intent intent = getIntent();
 
 
 
@@ -180,7 +194,9 @@ public class DashboardActivity extends AppCompatActivity {
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent welcomeScreenIntent = new Intent(DashboardActivity.this, com.example.navi.m4projectsetupuserstoriesandloginlogout.Controllers.WelcomeScreen.class);
+                Intent welcomeScreenIntent = new Intent(DashboardActivity.this,
+                        com.example.navi.m4projectsetupuserstoriesandloginlogout.Controllers
+                                .WelcomeScreen.class);
                 startActivity(welcomeScreenIntent);
             }
         });
@@ -189,7 +205,9 @@ public class DashboardActivity extends AppCompatActivity {
         shelterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent shelterListScreenIntent = new Intent(DashboardActivity.this, com.example.navi.m4projectsetupuserstoriesandloginlogout.Controllers.ShelterListActivity.class);
+                Intent shelterListScreenIntent = new Intent(DashboardActivity.this,
+                        com.example.navi.m4projectsetupuserstoriesandloginlogout.Controllers
+                                .ShelterListActivity.class);
                 shelterListScreenIntent.putExtra("username", username);
                 shelterListScreenIntent.putExtra("admin", admin);
                 startActivity(shelterListScreenIntent);
@@ -200,7 +218,9 @@ public class DashboardActivity extends AppCompatActivity {
         mapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent shelterMapScreenIntent = new Intent(DashboardActivity.this, com.example.navi.m4projectsetupuserstoriesandloginlogout.Controllers.MapActivity.class);
+                Intent shelterMapScreenIntent = new Intent(DashboardActivity.this,
+                        com.example.navi.m4projectsetupuserstoriesandloginlogout.Controllers
+                                .MapActivity.class);
                 shelterMapScreenIntent.putExtra("username", username);
                 shelterMapScreenIntent.putExtra("admin", admin);
                 startActivity(shelterMapScreenIntent);
@@ -234,7 +254,8 @@ public class DashboardActivity extends AppCompatActivity {
                                         processing = false;
                                         cancel = true;
                                     } else {
-                                        AlertDialog.Builder builder = new AlertDialog.Builder(DashboardActivity.this);
+                                        AlertDialog.Builder builder = new AlertDialog
+                                                .Builder(DashboardActivity.this);
                                         builder.setMessage("An unknown error occurred.")
                                                 .setNegativeButton("Retry", null)
                                                 .create()
@@ -251,7 +272,8 @@ public class DashboardActivity extends AppCompatActivity {
                         }
                     };
 
-                    ReleaseRequest releaseRequest = new ReleaseRequest(reservedBeds, reservedShelterID, username, responseListener);
+                    ReleaseRequest releaseRequest = new ReleaseRequest(reservedBeds,
+                            reservedShelterID, username, responseListener);
                     RequestQueue queue = Volley.newRequestQueue(DashboardActivity.this);
                     queue.add(releaseRequest);
 
@@ -267,7 +289,8 @@ public class DashboardActivity extends AppCompatActivity {
                             if (!cancel) {
                                 cancel = true;
                                 processing = false;
-                                AlertDialog.Builder builder = new AlertDialog.Builder(DashboardActivity.this);
+                                AlertDialog.Builder builder = new AlertDialog
+                                        .Builder(DashboardActivity.this);
                                 builder.setMessage("Unable to communicate with the server. Please check your connection and try again later.")
                                         .setNegativeButton("Retry", null)
                                         .create()

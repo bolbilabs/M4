@@ -38,7 +38,7 @@ public class PreRegisteredShelters {
     public Shelter getCurrentShelter() { return currentShelter; }
 
     /**
-     * @param course
+     * @param course setting to new variable
      */
     public void setCurrentShelter(Shelter course) { currentShelter = course; }
 

@@ -17,6 +17,13 @@ public class ReserveRequest extends StringRequest {
 
     private Map<String, String> params;
 
+    /**
+     *
+     * @param reservedBeds number of reserved bed
+     * @param reservedShelter_id number of shelter's id
+     * @param username the username
+     * @param listener the listener
+     */
     public ReserveRequest(int reservedBeds, int reservedShelter_id, String username,
                           Response.Listener<String> listener) {
         super(Method.POST, RESERVE_REQUEST_URL, listener, null);

@@ -7,6 +7,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Puts the most current reserved beds, the shelter it's reserving in question, and the
+ * username in the database.
+ *
  * Created by dfriedman32 on 3/19/18.
  */
 

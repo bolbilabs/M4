@@ -17,7 +17,8 @@ public class ReserveRequest extends StringRequest {
 
     private Map<String, String> params;
 
-    public ReserveRequest(int reservedBeds, int reservedShelter_id, String username, Response.Listener<String> listener) {
+    public ReserveRequest(int reservedBeds, int reservedShelter_id, String username,
+                          Response.Listener<String> listener) {
         super(Method.POST, RESERVE_REQUEST_URL, listener, null);
         params = new HashMap<>();
         params.put("reservedBeds",reservedBeds + "");

@@ -17,7 +17,8 @@ public class ShelterSearchTest {
     @Test
     public void SearchMenShouldBeTrue() throws Exception {
         String searchTerm = "Men";
-        s = new Shelter("33", "TestShelter", "100", "Men","1","2", "address", "notes", "phoneNumber");
+        s = new Shelter("33", "TestShelter", "100", "Men","1","2", "address", "notes",
+                "phoneNumber");
         boolean result = ShelterSearch.filterShelter(searchTerm, s);
         assertTrue("Result should be true", result);
     }
@@ -25,7 +26,8 @@ public class ShelterSearchTest {
     @Test
     public void SearchMenShouldBeFalse() throws Exception {
         String searchTerm = "Men";
-        s = new Shelter("33", "TestShelter", "100", "Women","1","2", "address", "notes", "phoneNumber");
+        s = new Shelter("33", "TestShelter", "100", "Women","1","2", "address", "notes",
+                "phoneNumber");
         boolean result = ShelterSearch.filterShelter(searchTerm, s);
         assertFalse("Result should be false", result);
     }
@@ -34,7 +36,8 @@ public class ShelterSearchTest {
     @Test
     public void SearchMaleShouldBeTrue() throws Exception {
         String searchTerm = "Male";
-        s = new Shelter("33", "TestShelter", "100", "Male","1","2", "address", "notes", "phoneNumber");
+        s = new Shelter("33", "TestShelter", "100", "Male","1","2", "address", "notes",
+                "phoneNumber");
         boolean result = ShelterSearch.filterShelter(searchTerm, s);
         assertTrue("Result should be true", result);
     }
@@ -42,7 +45,8 @@ public class ShelterSearchTest {
     @Test
     public void SearchMaleShouldBeFalse() throws Exception {
         String searchTerm = "Male";
-        s = new Shelter("33", "TestShelter", "100", "Female","1","2", "address", "notes", "phoneNumber");
+        s = new Shelter("33", "TestShelter", "100", "Female","1","2", "address", "notes",
+                "phoneNumber");
         boolean result = ShelterSearch.filterShelter(searchTerm, s);
         assertFalse("Result should be false", result);
     }
@@ -51,7 +55,8 @@ public class ShelterSearchTest {
     @Test
     public void SearchWomenShouldBeTrue() throws Exception {
         String searchTerm = "Women";
-        s = new Shelter("33", "TestShelter", "100", "Women","1","2", "address", "notes", "phoneNumber");
+        s = new Shelter("33", "TestShelter", "100", "Women","1","2", "address", "notes",
+                "phoneNumber");
         boolean result = ShelterSearch.filterShelter(searchTerm, s);
         assertTrue("Result should be true", result);
     }
@@ -59,7 +64,8 @@ public class ShelterSearchTest {
     @Test
     public void SearchWomenShouldBeFalse() throws Exception {
         String searchTerm = "Women";
-        s = new Shelter("33", "TestShelter", "100", "Men","1","2", "address", "notes", "phoneNumber");
+        s = new Shelter("33", "TestShelter", "100", "Men","1","2", "address", "notes",
+                "phoneNumber");
         boolean result = ShelterSearch.filterShelter(searchTerm, s);
         assertFalse("Result should be false", result);
     }
@@ -68,7 +74,8 @@ public class ShelterSearchTest {
     @Test
     public void SearchFemaleShouldBeTrue() throws Exception {
         String searchTerm = "Female";
-        s = new Shelter("33", "TestShelter", "100", "Female","1","2", "address", "notes", "phoneNumber");
+        s = new Shelter("33", "TestShelter", "100", "Female","1","2", "address", "notes",
+                "phoneNumber");
         boolean result = ShelterSearch.filterShelter(searchTerm, s);
         assertTrue("Result should be true", result);
     }
@@ -76,7 +83,8 @@ public class ShelterSearchTest {
     @Test
     public void SearchFemaleShouldBeFalse() throws Exception {
         String searchTerm = "female";
-        s = new Shelter("33", "TestShelter", "100", "Male","1","2", "address", "notes", "phoneNumber");
+        s = new Shelter("33", "TestShelter", "100", "Male","1","2", "address", "notes",
+                "phoneNumber");
         boolean result = ShelterSearch.filterShelter(searchTerm, s);
         assertFalse("Result should be false", result);
     }
@@ -85,7 +93,8 @@ public class ShelterSearchTest {
     @Test
     public void SearchFamiliesWithNewbornsShouldBeTrue() throws Exception {
         String searchTerm = "families with newborns";
-        s = new Shelter("33", "TestShelter", "100", "families with newborns","1","2", "address", "notes", "phoneNumber");
+        s = new Shelter("33", "TestShelter", "100", "families with newborns","1","2", "address",
+                "notes", "phoneNumber");
         boolean result = ShelterSearch.filterShelter(searchTerm, s);
         assertTrue("Result should be true", result);
     }
@@ -93,7 +102,8 @@ public class ShelterSearchTest {
     @Test
     public void SearchFamiliesWithNewbornsShouldBeFalse() throws Exception {
         String searchTerm = "families with newborns";
-        s = new Shelter("33", "TestShelter", "100", "Women","1","2", "address", "notes", "phoneNumber");
+        s = new Shelter("33", "TestShelter", "100", "Women","1","2", "address", "notes",
+                "phoneNumber");
         boolean result = ShelterSearch.filterShelter(searchTerm, s);
         assertFalse("Result should be false", result);
     }
@@ -102,7 +112,8 @@ public class ShelterSearchTest {
     @Test
     public void SearchFamiliesWChildrenUnder5ShouldBeTrue() throws Exception {
         String searchTerm = "families w/ children under 5";
-        s = new Shelter("33", "TestShelter", "100", "families w/ children under 5","1","2", "address", "notes", "phoneNumber");
+        s = new Shelter("33", "TestShelter", "100", "families w/ children under 5","1","2",
+                "address", "notes", "phoneNumber");
         boolean result = ShelterSearch.filterShelter(searchTerm, s);
         assertTrue("Result should be true", result);
     }
@@ -110,7 +121,8 @@ public class ShelterSearchTest {
     @Test
     public void SearchFamiliesWChildrenUnder5ShouldBeFalse() throws Exception {
         String searchTerm = "families w/ children under 5";
-        s = new Shelter("33", "TestShelter", "100", "Women","1","2", "address", "notes", "phoneNumber");
+        s = new Shelter("33", "TestShelter", "100", "Women","1","2", "address", "notes",
+                "phoneNumber");
         boolean result = ShelterSearch.filterShelter(searchTerm, s);
         assertFalse("Result should be false", result);
     }
@@ -127,7 +139,8 @@ public class ShelterSearchTest {
     @Test
     public void SearchFamiliesWNewbornsShouldBeFalse() throws Exception {
         String searchTerm = "families w/ newborns";
-        s = new Shelter("33", "TestShelter", "100", "Women","1","2", "address", "notes", "phoneNumber");
+        s = new Shelter("33", "TestShelter", "100", "Women","1","2", "address", "notes",
+                "phoneNumber");
         boolean result = ShelterSearch.filterShelter(searchTerm, s);
         assertFalse("Result should be false", result);
     }
@@ -136,7 +149,8 @@ public class ShelterSearchTest {
     @Test
     public void SearchChildShouldBeTrue() throws Exception {
         String searchTerm = "child";
-        s = new Shelter("33", "TestShelter", "100", "Children","1","2", "address", "notes", "phoneNumber");
+        s = new Shelter("33", "TestShelter", "100", "Children","1","2", "address", "notes",
+                "phoneNumber");
         boolean result = ShelterSearch.filterShelter(searchTerm, s);
         assertTrue("Result should be true", result);
     }
@@ -144,7 +158,8 @@ public class ShelterSearchTest {
     @Test
     public void SearchChildShouldBeFalse() throws Exception {
         String searchTerm = "child";
-        s = new Shelter("33", "TestShelter", "100", "women","1","2", "address", "notes", "phoneNumber");
+        s = new Shelter("33", "TestShelter", "100", "women","1","2", "address", "notes",
+                "phoneNumber");
         boolean result = ShelterSearch.filterShelter(searchTerm, s);
         assertFalse("Result should be false", result);
     }
@@ -153,7 +168,8 @@ public class ShelterSearchTest {
     @Test
     public void SearchChildrenShouldBeTrue() throws Exception {
         String searchTerm = "children";
-        s = new Shelter("33", "TestShelter", "100", "Children","1","2", "address", "notes", "phoneNumber");
+        s = new Shelter("33", "TestShelter", "100", "Children","1","2", "address", "notes",
+                "phoneNumber");
         boolean result = ShelterSearch.filterShelter(searchTerm, s);
         assertTrue("Result should be true", result);
     }
@@ -161,7 +177,8 @@ public class ShelterSearchTest {
     @Test
     public void SearchChildrenShouldBeFalse() throws Exception {
         String searchTerm = "children";
-        s = new Shelter("33", "TestShelter", "100", "men","1","2", "address", "notes", "phoneNumber");
+        s = new Shelter("33", "TestShelter", "100", "men","1","2", "address", "notes",
+                "phoneNumber");
         boolean result = ShelterSearch.filterShelter(searchTerm, s);
         assertFalse("Result should be false", result);
     }
@@ -170,7 +187,8 @@ public class ShelterSearchTest {
     @Test
     public void SearchYoungAdultShouldBeTrue() throws Exception {
         String searchTerm = "young adult";
-        s = new Shelter("33", "TestShelter", "100", "young adults","1","2", "address", "notes", "phoneNumber");
+        s = new Shelter("33", "TestShelter", "100", "young adults","1","2", "address",
+                "notes", "phoneNumber");
         boolean result = ShelterSearch.filterShelter(searchTerm, s);
         assertTrue("Result should be true", result);
     }
@@ -178,7 +196,8 @@ public class ShelterSearchTest {
     @Test
     public void SearchYoungAdultShouldBeFalse() throws Exception {
         String searchTerm = "young adult";
-        s = new Shelter("33", "TestShelter", "100", "men","1","2", "address", "notes", "phoneNumber");
+        s = new Shelter("33", "TestShelter", "100", "men","1","2", "address", "notes",
+                "phoneNumber");
         boolean result = ShelterSearch.filterShelter(searchTerm, s);
         assertFalse("Result should be false", result);
     }
@@ -187,7 +206,8 @@ public class ShelterSearchTest {
     @Test
     public void SearchYoungAdultsShouldBeTrue() throws Exception {
         String searchTerm = "young adults";
-        s = new Shelter("33", "TestShelter", "100", "young adults","1","2", "address", "notes", "phoneNumber");
+        s = new Shelter("33", "TestShelter", "100", "young adults","1","2", "address", "notes",
+                "phoneNumber");
         boolean result = ShelterSearch.filterShelter(searchTerm, s);
         assertTrue("Result should be true", result);
     }
@@ -195,7 +215,8 @@ public class ShelterSearchTest {
     @Test
     public void SearchYoungAdultsShouldBeFalse() throws Exception {
         String searchTerm = "young adults";
-        s = new Shelter("33", "TestShelter", "100", "men","1","2", "address", "notes", "phoneNumber");
+        s = new Shelter("33", "TestShelter", "100", "men","1","2", "address", "notes",
+                "phoneNumber");
         boolean result = ShelterSearch.filterShelter(searchTerm, s);
         assertFalse("Result should be false", result);
     }
@@ -204,7 +225,8 @@ public class ShelterSearchTest {
     @Test
     public void SearchAnyoneShouldBeTrue() throws Exception {
         String searchTerm = "anyone";
-        s = new Shelter("33", "TestShelter", "100", "young adults","1","2", "address", "notes", "phoneNumber");
+        s = new Shelter("33", "TestShelter", "100", "young adults","1","2", "address", "notes",
+                "phoneNumber");
         boolean result = ShelterSearch.filterShelter(searchTerm, s);
         assertTrue("Result should be true", result);
     }
@@ -213,7 +235,8 @@ public class ShelterSearchTest {
     @Test
     public void SearchShelterNameShouldBeTrue() throws Exception {
         String searchTerm = "testshelter";
-        s = new Shelter("33", "TestShelter", "100", "young adults","1","2", "address", "notes", "phoneNumber");
+        s = new Shelter("33", "TestShelter", "100", "young adults","1","2", "address", "notes",
+                "phoneNumber");
         boolean result = ShelterSearch.filterShelter(searchTerm, s);
         assertTrue("Result should be true", result);
     }
@@ -221,7 +244,8 @@ public class ShelterSearchTest {
     @Test
     public void SearchShelterNameShouldBeFalse() throws Exception {
         String searchTerm = "randomName";
-        s = new Shelter("33", "TestShelter", "100", "young adults","1","2", "address", "notes", "phoneNumber");
+        s = new Shelter("33", "TestShelter", "100", "young adults","1","2", "address", "notes",
+                "phoneNumber");
         boolean result = ShelterSearch.filterShelter(searchTerm, s);
         assertFalse("Result should be false", result);
     }

@@ -29,7 +29,8 @@ public class WelcomeScreen extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-            Intent loginIntent = new Intent(WelcomeScreen.this, com.example.navi.m4projectsetupuserstoriesandloginlogout.Controllers.LoginActivity.class);
+            Intent loginIntent = new Intent(WelcomeScreen.this, com.example.navi
+                    .m4projectsetupuserstoriesandloginlogout.Controllers.LoginActivity.class);
             startActivity(loginIntent);
             }
         });
@@ -39,7 +40,9 @@ public class WelcomeScreen extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                Intent registerIntent = new Intent(WelcomeScreen.this, com.example.navi.m4projectsetupuserstoriesandloginlogout.Controllers.RegisterActivity.class);
+                Intent registerIntent = new Intent(WelcomeScreen.this,
+                        com.example.navi.m4projectsetupuserstoriesandloginlogout.Controllers
+                                .RegisterActivity.class);
                 startActivity(registerIntent);
             }
         });

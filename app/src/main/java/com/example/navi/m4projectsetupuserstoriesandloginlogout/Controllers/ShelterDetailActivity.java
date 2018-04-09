@@ -90,30 +90,44 @@ public class ShelterDetailActivity extends AppCompatActivity {
 //                        .setAction("Action", null).show();
 
                     ad.show();
-                        ad.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+                        ad.getButton(AlertDialog.BUTTON_POSITIVE)
+                                .setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
                                 cancel = false;
                                 if (!processing) {
-                                    if (!(input.getText().toString().equals("")) && isReserveValid(Integer.parseInt(input.getText().toString()))) {
+                                    if (!(input.getText().toString().equals(""))
+                                            && isReserveValid(Integer
+                                            .parseInt(input.getText().toString()))) {
                                         processing = true;
-                                        int reservedBeds = Integer.parseInt(input.getText().toString());
-                                        int reservedShelter_id = Integer.parseInt(preRegisteredShelters.getCurrentShelter().getKey());
+                                        int reservedBeds = Integer
+                                                .parseInt(input.getText().toString());
+                                        int reservedShelter_id = Integer
+                                                .parseInt(preRegisteredShelters.getCurrentShelter()
+                                                        .getKey());
                                         String username = User.getUsername();
 
 
-                                        Response.Listener<String> responseListener = new Response.Listener<String>() {
+                                        Response.Listener<String> responseListener = new Response
+                                                .Listener<String>() {
                                             @Override
                                             public void onResponse(String response) {
                                                 if (!cancel) {
                                                     try {
-                                                        JSONObject jsonResponse = new JSONObject(response);
-                                                        boolean success = jsonResponse.getBoolean("success");
+                                                        JSONObject jsonResponse =
+                                                                new JSONObject(response);
+                                                        boolean success = jsonResponse
+                                                                .getBoolean("success");
                                                         if (success) {
-                                                            String text = input.getText().toString();
-                                                            User.setReservedBeds(Integer.parseInt(text));
+                                                            String text = input
+                                                                    .getText().toString();
+                                                            User.setReservedBeds(Integer
+                                                                    .parseInt(text));
                                                             finish();
-                                                            User.setReservedShelterID(Integer.parseInt(preRegisteredShelters.getCurrentShelter().getKey()));
+                                                            User.setReservedShelterID(Integer
+                                                                    .parseInt(preRegisteredShelters
+                                                                            .getCurrentShelter()
+                                                                            .getKey()));
                                                             Intent dashboardScreenIntent = new Intent(ShelterDetailActivity.this, com.example.navi.m4projectsetupuserstoriesandloginlogout.Controllers.DashboardActivity.class);
                                                             startActivity(dashboardScreenIntent);
                                                             ad.dismiss();
@@ -134,8 +148,11 @@ public class ShelterDetailActivity extends AppCompatActivity {
                                             }
                                         };
 
-                                        ReserveRequest reserveRequest = new ReserveRequest(reservedBeds, reservedShelter_id, username, responseListener);
-                                        RequestQueue queue = Volley.newRequestQueue(ShelterDetailActivity.this);
+                                        ReserveRequest reserveRequest =
+                                                new ReserveRequest(reservedBeds, reservedShelter_id,
+                                                         username, responseListener);
+                                        RequestQueue queue = Volley
+                                                .newRequestQueue(ShelterDetailActivity.this);
                                         queue.add(reserveRequest);
 
                                         new CountDownTimer(30000, 1000) {
@@ -148,7 +165,9 @@ public class ShelterDetailActivity extends AppCompatActivity {
                                                 if (!cancel) {
                                                     cancel = true;
                                                     processing = false;
-                                                    android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(ShelterDetailActivity.this);
+                                                    android.app.AlertDialog.Builder builder = new
+                                                            android.app.AlertDialog.Builder(
+                                                                    ShelterDetailActivity.this);
                                                     builder.setMessage("Unable to communicate with the server. Please check your connection and try again later.")
                                                             .setNegativeButton("Retry", null)
                                                             .create()

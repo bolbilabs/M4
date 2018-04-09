@@ -162,7 +162,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * @param view
      */
     public void onCancelPressed(View view) {
-        Intent cancelIntent = new Intent(LoginActivity.this, com.example.navi.m4projectsetupuserstoriesandloginlogout.Controllers.WelcomeScreen.class);
+        Intent cancelIntent = new Intent(LoginActivity.this, com.example.navi
+                .m4projectsetupuserstoriesandloginlogout.Controllers.WelcomeScreen.class);
         startActivity(cancelIntent);
     }
 
@@ -223,13 +224,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         // Hard coded user/admin and pass just in case the database is down
         if (username.equals("user") && password.equals("pass")) {
-            Intent loginIntent = new Intent(LoginActivity.this, com.example.navi.m4projectsetupuserstoriesandloginlogout.Controllers.DashboardActivity.class);
+            Intent loginIntent = new Intent(LoginActivity.this, com.example.navi
+                    .m4projectsetupuserstoriesandloginlogout.Controllers.DashboardActivity.class);
             loginIntent.putExtra("username", username);
             loginIntent.putExtra("admin", 0);
             startActivity(loginIntent);
         }
         if (username.equals("admin") && password.equals("pass")) {
-            Intent loginIntent = new Intent(LoginActivity.this, com.example.navi.m4projectsetupuserstoriesandloginlogout.Controllers.DashboardActivity.class);
+            Intent loginIntent = new Intent(LoginActivity.this, com.example.navi
+                    .m4projectsetupuserstoriesandloginlogout.Controllers.DashboardActivity.class);
             loginIntent.putExtra("username", username);
             loginIntent.putExtra("admin", 1);
             startActivity(loginIntent);
@@ -261,7 +264,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
                             new User(username,admin,reservedBeds,reservedShelterID);
 
-                            Intent loginIntent = new Intent(LoginActivity.this, com.example.navi.m4projectsetupuserstoriesandloginlogout.Controllers.DashboardActivity.class);
+                            Intent loginIntent = new Intent(LoginActivity.this,
+                                    com.example.navi.m4projectsetupuserstoriesandloginlogout
+                                            .Controllers.DashboardActivity.class);
                             startActivity(loginIntent);
                         } else {
                             showProgress(false);

@@ -44,7 +44,8 @@ public class ShelterListActivity extends AppCompatActivity {
 
 
     private SimpleShelterRecyclerViewAdapter mAdaptor
-            = new SimpleShelterRecyclerViewAdapter(this, PreRegisteredShelters.getInstance().getShelters(), mTwoPane);
+            = new SimpleShelterRecyclerViewAdapter(this, PreRegisteredShelters.getInstance()
+            .getShelters(), mTwoPane);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,7 +116,8 @@ public class ShelterListActivity extends AppCompatActivity {
     }
 
     public static class SimpleShelterRecyclerViewAdapter
-            extends RecyclerView.Adapter<SimpleShelterRecyclerViewAdapter.ViewHolder> implements Filterable {
+            extends RecyclerView.Adapter<SimpleShelterRecyclerViewAdapter.ViewHolder>
+            implements Filterable {
 
         private final ShelterListActivity mParentActivity;
         private List<Shelter> mValues;
@@ -136,7 +138,8 @@ public class ShelterListActivity extends AppCompatActivity {
                 @Override
                 protected FilterResults performFiltering(CharSequence charSequence) {
                     String charString = charSequence.toString();
-                    PreRegisteredShelters preRegisteredShelters = PreRegisteredShelters.getInstance();
+                    PreRegisteredShelters preRegisteredShelters
+                            = PreRegisteredShelters.getInstance();
                     List<Shelter> shelter_list;
                     if (charString.isEmpty()) {
                         shelter_list = preRegisteredShelters.getShelters();
@@ -161,7 +164,8 @@ public class ShelterListActivity extends AppCompatActivity {
                 }
 
                 @Override
-                protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                protected void publishResults(CharSequence charSequence,
+                                              FilterResults filterResults) {
                     mValues = (ArrayList<Shelter>) filterResults.values;
                     notifyDataSetChanged();
                 }
@@ -193,7 +197,8 @@ public class ShelterListActivity extends AppCompatActivity {
                     if (mTwoPane) {
                         //if a two pane window, we change the contents on the main screen
                         Bundle arguments = new Bundle();
-                        arguments.putString(ShelterDetailFragment.ARG_ITEM_ID, holder.mValue.getKey());
+                        arguments.putString(ShelterDetailFragment.ARG_ITEM_ID,
+                                holder.mValue.getKey());
 
                         ShelterDetailFragment fragment = new ShelterDetailFragment();
                         fragment.setArguments(arguments);

@@ -150,7 +150,8 @@ public class RegisterActivity extends AppCompatActivity {
                                 pbLoading.setVisibility(View.INVISIBLE);
                                 AlertDialog.Builder builder = new AlertDialog
                                         .Builder(RegisterActivity.this);
-                                builder.setMessage("Unable to communicate with the server. Please check your connection and try again later.")
+                                builder.setMessage("Unable to communicate with the server."
+                                        + " Please check your connection and try again later.")
                                         .setNegativeButton("Retry", null)
                                         .create()
                                         .show();

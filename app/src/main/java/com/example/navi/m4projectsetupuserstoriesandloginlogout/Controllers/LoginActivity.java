@@ -301,8 +301,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     if (!cancel) {
                         cancel = true;
                         showProgress(false);
-                        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-                        builder.setMessage("Unable to communicate with the server. Please check your connection and try again later.")
+                        AlertDialog.Builder builder = new AlertDialog.Builder(
+                                LoginActivity.this);
+                        builder.setMessage("Unable to communicate with the server. Please check"
+                                + "your connection and try again later.")
                                 .setNegativeButton("Retry", null)
                                 .create()
                                 .show();

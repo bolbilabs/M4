@@ -134,7 +134,9 @@ public class ShelterDetailActivity extends AppCompatActivity {
                                                             processing = false;
                                                             cancel = true;
                                                         } else {
-                                                            input.setError("We're sorry, but your reservation exceeds maximum occupancy.");
+                                                            input.setError("We're sorry, but your"
+                                                                    + " reservation exceeds maximum"
+                                                                    + " occupancy.");
                                                             processing = false;
                                                             cancel = true;
 
@@ -170,7 +172,9 @@ public class ShelterDetailActivity extends AppCompatActivity {
                                                     android.app.AlertDialog.Builder builder = new
                                                             android.app.AlertDialog.Builder(
                                                                     ShelterDetailActivity.this);
-                                                    builder.setMessage("Unable to communicate with the server. Please check your connection and try again later.")
+                                                    builder.setMessage("Unable to communicate with"
+                                                            + "the server. Please check your connec"
+                                                            +"tion and try again later.")
                                                             .setNegativeButton("Retry", null)
                                                             .create()
                                                             .show();

@@ -178,7 +178,8 @@ public class ShelterSearchTest {
     @Test
     public void SearchFamiliesWNewbornsShouldBeTrue() throws Exception {
         String searchTerm = "families w/ newborns";
-        s = new Shelter("33", "TestShelter", "100", "families w/ newborns","1","2", "address", "notes", "phoneNumber");
+        s = new Shelter("33", "TestShelter", "100", "families w/ newborns","1",
+                "2", "address", "notes", "phoneNumber");
         boolean result = ShelterSearch.filterShelter(searchTerm, s);
         assertTrue("Result should be true", result);
     }

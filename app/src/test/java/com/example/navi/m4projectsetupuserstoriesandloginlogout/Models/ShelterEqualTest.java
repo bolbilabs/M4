@@ -45,7 +45,8 @@ public class ShelterEqualTest {
 
         testName = new Shelter("1", "Shelter Sally", "2", "3", "4", "5",
                 "6", "7", "8");
-        assertFalse("The shelter name is different from the actual one", shelterName.equals(testName));
+        assertFalse("The shelter name is different from the actual one", shelterName.equals(
+                testName));
     }
 
 }

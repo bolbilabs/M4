@@ -293,7 +293,8 @@ public class DashboardActivity extends AppCompatActivity {
                                 processing = false;
                                 AlertDialog.Builder builder = new AlertDialog
                                         .Builder(DashboardActivity.this);
-                                builder.setMessage("Unable to communicate with the server. Please check your connection and try again later.")
+                                builder.setMessage("Unable to communicate with the server. Please"
+                                        + "check your connection and try again later.")
                                         .setNegativeButton("Retry", null)
                                         .create()
                                         .show();

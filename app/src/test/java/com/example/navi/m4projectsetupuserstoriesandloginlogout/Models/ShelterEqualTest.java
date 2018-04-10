@@ -15,12 +15,20 @@ public class ShelterEqualTest {
     private Shelter shelterName;
     private Shelter testName;
 
+    /**
+     * set up for the test
+     * @throws Exception an exception
+     */
     @Before
     public void setUp() throws Exception {
         shelterName = new Shelter("1", "Shelter Bob", "2", "3", "4", "5",
                 "6", "7", "8");
     }
 
+    /**
+     * tests if two shelters equal works
+     * @throws Exception an exception
+     */
     @Test
     public void equals() throws Exception {
         testName = new Shelter("1", null, "2", "3", "4", "5",

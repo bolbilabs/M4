@@ -15,7 +15,10 @@ public class ShelterSearchTest {
 
     private Shelter s;
 
-    //men
+    /**
+     * test search men
+     * @throws Exception throws an exception
+     */
     @Test
     public void SearchMenShouldBeTrue() throws Exception {
         String searchTerm = "Men";
@@ -25,6 +28,10 @@ public class ShelterSearchTest {
         assertTrue("Result should be true", result);
     }
 
+    /**
+     * tests search men
+     * @throws Exception an exception
+     */
     @Test
     public void SearchMenShouldBeFalse() throws Exception {
         String searchTerm = "Men";
@@ -34,7 +41,10 @@ public class ShelterSearchTest {
         assertFalse("Result should be false", result);
     }
 
-    //male
+    /**
+     * tests search male
+     * @throws Exception an exception
+     */
     @Test
     public void SearchMaleShouldBeTrue() throws Exception {
         String searchTerm = "Male";
@@ -44,6 +54,10 @@ public class ShelterSearchTest {
         assertTrue("Result should be true", result);
     }
 
+    /**
+     * tests search male
+     * @throws Exception an exception
+     */
     @Test
     public void SearchMaleShouldBeFalse() throws Exception {
         String searchTerm = "Male";
@@ -53,7 +67,10 @@ public class ShelterSearchTest {
         assertFalse("Result should be false", result);
     }
 
-    //women
+    /**
+     * tests search women
+     * @throws Exception exception
+     */
     @Test
     public void SearchWomenShouldBeTrue() throws Exception {
         String searchTerm = "Women";
@@ -63,6 +80,10 @@ public class ShelterSearchTest {
         assertTrue("Result should be true", result);
     }
 
+    /**
+     * tests search women
+     * @throws Exception an exception
+     */
     @Test
     public void SearchWomenShouldBeFalse() throws Exception {
         String searchTerm = "Women";
@@ -72,7 +93,10 @@ public class ShelterSearchTest {
         assertFalse("Result should be false", result);
     }
 
-    //female
+    /**
+     * tests search female
+     * @throws Exception an exception
+     */
     @Test
     public void SearchFemaleShouldBeTrue() throws Exception {
         String searchTerm = "Female";
@@ -82,6 +106,10 @@ public class ShelterSearchTest {
         assertTrue("Result should be true", result);
     }
 
+    /**
+     * tests search female
+     * @throws Exception an exception
+     */
     @Test
     public void SearchFemaleShouldBeFalse() throws Exception {
         String searchTerm = "female";
@@ -91,7 +119,10 @@ public class ShelterSearchTest {
         assertFalse("Result should be false", result);
     }
 
-    //families with newborns
+    /**
+     * tests families with newborns
+     * @throws Exception an exception
+     */
     @Test
     public void SearchFamiliesWithNewbornsShouldBeTrue() throws Exception {
         String searchTerm = "families with newborns";
@@ -101,6 +132,10 @@ public class ShelterSearchTest {
         assertTrue("Result should be true", result);
     }
 
+    /**
+     * tests families with newborns
+     * @throws Exception  an exception
+     */
     @Test
     public void SearchFamiliesWithNewbornsShouldBeFalse() throws Exception {
         String searchTerm = "families with newborns";
@@ -110,7 +145,10 @@ public class ShelterSearchTest {
         assertFalse("Result should be false", result);
     }
 
-    //families w/ children under 5
+    /**
+     * tests children under 5
+     * @throws Exception an exception
+     */
     @Test
     public void SearchFamiliesWChildrenUnder5ShouldBeTrue() throws Exception {
         String searchTerm = "families w/ children under 5";
@@ -120,6 +158,10 @@ public class ShelterSearchTest {
         assertTrue("Result should be true", result);
     }
 
+    /**
+     * tests children under 5
+     * @throws Exception an exception
+     */
     @Test
     public void SearchFamiliesWChildrenUnder5ShouldBeFalse() throws Exception {
         String searchTerm = "families w/ children under 5";
@@ -129,7 +171,10 @@ public class ShelterSearchTest {
         assertFalse("Result should be false", result);
     }
 
-    //families w/ newborns
+    /**
+     * tests newborns
+     * @throws Exception an exception
+     */
     @Test
     public void SearchFamiliesWNewbornsShouldBeTrue() throws Exception {
         String searchTerm = "families w/ newborns";
@@ -138,6 +183,10 @@ public class ShelterSearchTest {
         assertTrue("Result should be true", result);
     }
 
+    /**
+     * tests newborns
+     * @throws Exception an exception
+     */
     @Test
     public void SearchFamiliesWNewbornsShouldBeFalse() throws Exception {
         String searchTerm = "families w/ newborns";
@@ -147,7 +196,10 @@ public class ShelterSearchTest {
         assertFalse("Result should be false", result);
     }
 
-    //child
+    /**
+     * tests search child
+     * @throws Exception an exception
+     */
     @Test
     public void SearchChildShouldBeTrue() throws Exception {
         String searchTerm = "child";
@@ -157,6 +209,10 @@ public class ShelterSearchTest {
         assertTrue("Result should be true", result);
     }
 
+    /**
+     * tests search child
+     * @throws Exception an exception
+     */
     @Test
     public void SearchChildShouldBeFalse() throws Exception {
         String searchTerm = "child";
@@ -166,7 +222,10 @@ public class ShelterSearchTest {
         assertFalse("Result should be false", result);
     }
 
-    //children
+    /**
+     * tests children
+     * @throws Exception an exception
+     */
     @Test
     public void SearchChildrenShouldBeTrue() throws Exception {
         String searchTerm = "children";
@@ -176,6 +235,10 @@ public class ShelterSearchTest {
         assertTrue("Result should be true", result);
     }
 
+    /**
+     * tests children
+     * @throws Exception an exception
+     */
     @Test
     public void SearchChildrenShouldBeFalse() throws Exception {
         String searchTerm = "children";
@@ -185,7 +248,10 @@ public class ShelterSearchTest {
         assertFalse("Result should be false", result);
     }
 
-    //young adult
+    /**
+     * tests young adult
+     * @throws Exception an exception
+     */
     @Test
     public void SearchYoungAdultShouldBeTrue() throws Exception {
         String searchTerm = "young adult";
@@ -195,6 +261,10 @@ public class ShelterSearchTest {
         assertTrue("Result should be true", result);
     }
 
+    /**
+     * tests young adult
+     * @throws Exception an exception
+     */
     @Test
     public void SearchYoungAdultShouldBeFalse() throws Exception {
         String searchTerm = "young adult";
@@ -204,7 +274,10 @@ public class ShelterSearchTest {
         assertFalse("Result should be false", result);
     }
 
-    //young adults
+    /**
+     * tests young adult
+     * @throws Exception an exception
+     */
     @Test
     public void SearchYoungAdultsShouldBeTrue() throws Exception {
         String searchTerm = "young adults";
@@ -214,6 +287,10 @@ public class ShelterSearchTest {
         assertTrue("Result should be true", result);
     }
 
+    /**
+     * tests young adult
+     * @throws Exception an exception
+     */
     @Test
     public void SearchYoungAdultsShouldBeFalse() throws Exception {
         String searchTerm = "young adults";
@@ -223,7 +300,10 @@ public class ShelterSearchTest {
         assertFalse("Result should be false", result);
     }
 
-    //anyone
+    /**
+     * tests anyone
+     * @throws Exception an exception
+     */
     @Test
     public void SearchAnyoneShouldBeTrue() throws Exception {
         String searchTerm = "anyone";
@@ -233,7 +313,10 @@ public class ShelterSearchTest {
         assertTrue("Result should be true", result);
     }
 
-    //shelter name
+    /**
+     * tests shelter name search
+     * @throws Exception an exception
+     */
     @Test
     public void SearchShelterNameShouldBeTrue() throws Exception {
         String searchTerm = "testshelter";
@@ -243,6 +326,10 @@ public class ShelterSearchTest {
         assertTrue("Result should be true", result);
     }
 
+    /**
+     * tests search shelter name
+     * @throws Exception an exception
+     */
     @Test
     public void SearchShelterNameShouldBeFalse() throws Exception {
         String searchTerm = "randomName";

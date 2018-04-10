@@ -11,6 +11,10 @@ import org.junit.Test;
 public class UserReserveValidTest {
     private User user;
 
+    /**
+     * tests reserveValid
+     * @throws Exception an exception
+     */
     @Test
     public void isReserveValid() throws Exception {
         user = new User("Homer",1,0,1);

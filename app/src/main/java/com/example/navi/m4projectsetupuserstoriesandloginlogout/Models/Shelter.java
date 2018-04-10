@@ -109,15 +109,15 @@ public class Shelter {
     @Override
     public int hashCode() {
         int result = 17;
-        result = 31 * result + key.hashCode();
-        result = 31 * result + name.hashCode();
-        result = 31 * result + capacity.hashCode();
-        result = 31 * result + restrictions.hashCode();
-        result = 31 * result + longitude.hashCode();
-        result = 31 * result + latitude.hashCode();
-        result = 31 * result + address.hashCode();
-        result = 31 * result + notes.hashCode();
-        result = 31 * result + phoneNumber.hashCode();
+        result = (31 * result) + key.hashCode();
+        result = (31 * result) + name.hashCode();
+        result = (31 * result) + capacity.hashCode();
+        result = (31 * result) + restrictions.hashCode();
+        result = (31 * result) + longitude.hashCode();
+        result = (31 * result) + latitude.hashCode();
+        result = (31 * result) + address.hashCode();
+        result = (31 * result) + notes.hashCode();
+        result = (31 * result) + phoneNumber.hashCode();
         return result;
     }
 }

@@ -95,7 +95,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
+                if ((id == EditorInfo.IME_ACTION_DONE) || (id == EditorInfo.IME_NULL)) {
                     attemptLogin();
                     return true;
                 }
@@ -152,7 +152,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
         if (requestCode == REQUEST_READ_CONTACTS) {
-            if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            if ((grantResults.length == 1) && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
                 populateAutoComplete();
             }
         }
@@ -223,14 +223,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
 
         // Hard coded user/admin and pass just in case the database is down
-        if (username.equals("user") && password.equals("pass")) {
+        if ("user".equals(username) && "pass".equals(password)) {
             Intent loginIntent = new Intent(LoginActivity.this, com.example.navi
                     .m4projectsetupuserstoriesandloginlogout.Controllers.DashboardActivity.class);
             loginIntent.putExtra("username", username);
             loginIntent.putExtra("admin", 0);
             startActivity(loginIntent);
         }
-        if (username.equals("admin") && password.equals("pass")) {
+        if ("admin".equals(username) && "pass".equals(password)) {
             Intent loginIntent = new Intent(LoginActivity.this, com.example.navi
                     .m4projectsetupuserstoriesandloginlogout.Controllers.DashboardActivity.class);
             loginIntent.putExtra("username", username);
@@ -317,11 +317,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     private boolean isUsernameValid(String username) {
-        return username.length() > 0;
+        return !username.isEmpty();
     }
 
     private boolean isPasswordValid(String password) {
-        return password.length() > 0;
+        return !password.isEmpty();
     }
 
     /**
@@ -450,7 +450,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         @Override
         protected void onPostExecute(final Boolean success) {
-            mAuthTask = null;
+            //mAuthTask = null;
             showProgress(false);
 
             if (success) {
@@ -463,7 +463,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         @Override
         protected void onCancelled() {
-            mAuthTask = null;
+            //mAuthTask = null;
             showProgress(false);
         }
     }

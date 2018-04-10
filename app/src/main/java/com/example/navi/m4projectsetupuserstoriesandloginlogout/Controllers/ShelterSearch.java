@@ -9,22 +9,27 @@ final class ShelterSearch {
     }
 
     // see if shelter should be included in filtered list
-    static boolean filterShelter(String charText, Shelter s) {
-        charText = charText.toLowerCase();
+    static boolean filterShelter(String text, Shelter s) {
+        String charText = text.toLowerCase();
         String res = s.getRestrictions().toLowerCase();
 
         //modify charText
-        if (charText.equals("men"))
+        if ("men".equals(charText)) {
             charText = "male";
-        if (charText.equals("women"))
+        }
+        if ("women".equals(charText)) {
             charText = "female";
-        if (charText.equals("families with newborns")
-                || charText.equals("families w/ children under 5"))
+        }
+        if ("families with newborns".equals(charText)
+                || "families w/ children under 5".equals(charText)) {
             charText = "families w/ newborns";
-        if (charText.equals("child"))
+        }
+        if ("child".equals(charText)) {
             charText = "children";
-        if (charText.equals("young adult"))
+        }
+        if ("young adult".equals(charText)) {
             charText = "young adults";
+        }
 
         switch (charText) {
             case "male":

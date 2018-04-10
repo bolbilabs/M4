@@ -28,11 +28,11 @@ public class RegisterActivity extends AppCompatActivity {
     private boolean processing = false;
 
     private boolean isUsernameValid(String username) {
-        return username.length() > 0;
+        return !username.isEmpty();
     }
 
     private boolean isPasswordValid(String password) {
-        return password.length() > 0;
+        return !password.isEmpty();
     }
 
     @Override

@@ -96,7 +96,7 @@ public class ShelterDetailActivity extends AppCompatActivity {
                             public void onClick(View view) {
                                 cancel = false;
                                 if (!processing) {
-                                    if (!(input.getText().toString().equals(""))
+                                    if (!("".equals(input.getText().toString()))
                                             && isReserveValid(Integer
                                             .parseInt(input.getText().toString()))) {
                                         processing = true;

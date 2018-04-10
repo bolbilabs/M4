@@ -7,7 +7,7 @@ import java.util.ArrayList;
  *
  * created by Thomas Brownlow on 2/24/18
  */
-public class PreRegisteredShelters {
+public final class PreRegisteredShelters {
 
     /** Singleton instance */
     private static final PreRegisteredShelters _instance = new PreRegisteredShelters();

@@ -70,5 +70,26 @@ public class User {
     public boolean isReserveValid() {
         return ((reservedBeds > 0) && (reservedBeds < 7));
     }
+    /**
+     * returns a message to use for the invalid reserve
+     * @return the message
+     */
+    public String invalidReserveMessage() {
+        if (reservedBeds < 0) {
+            reservedBeds = 0;
+            return "There was a problem with our server, please try again";
+        } else if (reservedBeds > 7) {
+            return "You have already reserved the maximum amount of beds "
+                + "possible, please release your beds before reserving"
+                + " more.";
+        } else if (reservedShelterID != 0) {
+            return "You may only reserve beds from 1 shelter at a time, "
+                + "please release your beds before reserving more.";
+        } else {
+            return "You should have been able to reserve a bed, this "
+                + "message should never be shown.";
+        }
+
+    }
 
 }

@@ -229,10 +229,10 @@ public class ShelterListActivity extends AppCompatActivity {
         }
 
         class ViewHolder extends RecyclerView.ViewHolder {
-             final View mView;
-             final TextView mIdView;
-             final TextView mContentView;
-             Shelter mValue;
+            public final View mView;
+            public final TextView mIdView;
+            public final TextView mContentView;
+            public Shelter mValue;
 
 
             ViewHolder(View view) {

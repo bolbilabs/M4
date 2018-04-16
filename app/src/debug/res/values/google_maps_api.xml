@@ -3,9 +3,7 @@
 
     To get one, follow this link, follow the directions and press "Create" at the end:
 
-    https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&
-    keyType=CLIENT_SIDE_ANDROID&r=07:0C:48:A1:EF:77:1A:1F:A8:61:E8:D5:24:48:EC:AC:E4:78:B8:D9%3Bcom.
-    example.navi.m4projectsetupuserstoriesandloginlogout.Controllers
+    https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r=07:0C:48:A1:EF:77:1A:1F:A8:61:E8:D5:24:48:EC:AC:E4:78:B8:D9%3Bcom.example.navi.m4projectsetupuserstoriesandloginlogout.Controllers
 
     You can also add your credentials to an existing key, using these values:
 
@@ -21,6 +19,5 @@
     Once you have your key (it starts with "AIza"), replace the "google_maps_key"
     string in this file.
     -->
-    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">
-        AIzaSyB-7iKvbVKwJRShtxwZZ7nqUqg_OyiaPrw</string>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyB-7iKvbVKwJRShtxwZZ7nqUqg_OyiaPrw</string>
 </resources>
